@@ -1,6 +1,7 @@
 # Studentų galutinio balo skaičiuoklė
 ## Programos versijos 
-[v0.1](https://github.com/Step1st/2nd-Assignment/tree/v0.1)
+[v0.1](https://github.com/Step1st/2nd-Assignment/tree/v0.1)  
+[v0.2](https://github.com/Step1st/2nd-Assignment/tree/v0.2)
 
 ##  Programos naudojimas ir veikimo principas
 ### Veikimo princimas
@@ -19,7 +20,32 @@ First name          Last name           Final grade(median)
 Steponas            Tolomanovas          9.40
 ```
 ### Programos naudojimas
-Paleidus programą bus paprašyta įvesti studentų kiekį. Įvesti galima tik skaitmenis, įvedus kitus simbolius bus pranešta apie klaidą ir paprašyta įvesti studentų kiekį dar karta, kol nebus įrašytas tinkamas skaičius.
+Paleidus programą bus paklausta ar norima duomenys apie studentus skaityti iš failo ar įvesti ranka.
+```
+Get students from file or enter manually?(f/m): m
+Enter the number of students:
+```
+#### Pasirinkus skaityti iš failo
+Pasirinkus skaityti iš failo programoje iškarto bus paklausta ***ar naudoti mediana galutiniam pažymiui***. Pasirinkus n(ne) bus naudojimas vidurkis.
+```
+Get students from file or enter manually?(f/m): f
+Use median for final grade?(y/n):
+```
+Toliau programoje bus nuskaitytas kursiokai.txt failas, duomenys apdorojami ir rezultatas bus išvedamas į output.txt failą. (kursiokai.txt failas turi būti tam pačiam aplankale kaip ir programa)
+```
+Get students from file or enter manually?(f/m): f
+Use median for final grade?(y/n): y
+Reading...
+Reading took 0.866289 s
+Processing...
+Processing took: 4.16556 s
+Writing...
+writing to buffer took 0.807589 s
+Writing took 0.948784 s
+Press any key to continue . . .
+```
+#### Pasirinkus ranka
+Pasirinkus įvesti ranka bus paprašyta įvesti studentų kiekį. Įvesti galima tik skaitmenis, įvedus kitus simbolius bus pranešta apie klaidą ir paprašyta įvesti studentų kiekį dar karta, kol nebus įrašytas tinkamas skaičius.
 ```
 Enter the number of students: two
 
@@ -81,6 +107,13 @@ Steponas            Tolomanovas          9.00
 Vardenis            Pavardenis           9.40
 ```
 ## Įdiegimas
-Atsiustą *main_C-array.cpp* arba *main_vector.cpp* failą sukompiliuokite C++11 arba naujesniu standartu.  
-Turėdami GNU C++ kopilatorių komandinėje eilutėje ir esant folder'yje galite sukompilioti paleistadimi šias komandas:  
-```g++ --std=c++11 main_C-array.cpp -o balo_skaičiuoklė``` arba ```g++ --std=c++11 main_vector.cpp -o balo_skaičiuoklė```
+Visus atsiustus failus įdėkite į viena atskyra aplankalą ir *v0.2.sln* failą atidarykite su Visual Studio.  
+Atidarę šitam langelyje pasirinkite ```Release```   
+  
+![](https://raw.githubusercontent.com/Step1st/2nd-Assignment/assets/vsbuild1.png)
+
+Toliau langelyje ```Build``` paspauskite ```Build Solution```   
+  
+![](https://raw.githubusercontent.com/Step1st/2nd-Assignment/assets/vsbuild2.png)  
+  
+Toliau jūsų aplankale turėtu atsirasti ```Release``` aplankalas kuriame ir bus pabaigtas programos failas
