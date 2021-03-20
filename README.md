@@ -2,7 +2,8 @@
 ## Programos versijos 
 [v0.1](https://github.com/Step1st/2nd-Assignment/tree/v0.1)  
 [v0.2](https://github.com/Step1st/2nd-Assignment/tree/v0.2)  
-[v0.3](https://github.com/Step1st/2nd-Assignment/tree/v0.3)
+[v0.3](https://github.com/Step1st/2nd-Assignment/tree/v0.3)  
+[v0.4](https://github.com/Step1st/2nd-Assignment/tree/v0.4)
 
 ##  Programos naudojimas ir veikimo principas
 ### Veikimo princimas
