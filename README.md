@@ -133,12 +133,12 @@ Vardenis            Pavardenis           9.40
 
 #### Testavimo sistemos parametrai:
   CPU: Intel Core i7-10710U  
-  Ram: 2 x Hynix DDR4-2666 (1333 MHz) 8GB  
+  Ram: 2 x SK Hynix DDR4-2666 8GB  
   SSD: Western Digital PC SN520 NVMe 512GB  
 
 #### Testavimo rezultatai:
 
-|Studentų skaičius | Generavimo laikas | Nuskaitimo laikas | Skaičiavimas laikas | Rušiavimo laikas | Įrašimo į buferį laikas | Pilnas įrašimo laikas |
+|Studentų skaičius | Generavimo laikas | Nuskaitymo laikas | Skaičiavimas laikas | Rūšiavimo laikas | Įrašimo į buferį laikas | Pilnas įrašimo laikas |
 | ---------------- | ----------------- | ----------------- | ------------------- | ---------------- | ----------------------- | --------------------- | 
 | 1000             | 0.051983 s        | 0.0105604 s       | 0.0003101 s         | 0.0006044 s      | 0.0009792 s             | 0.0137528 s           |
 | 10000            |  0.102473 s       |  0.0796106 s      |    0.0020251 s      |   0.0052371 s    |    0.0083455 s          |    0.0250293 s        |
@@ -157,3 +157,4 @@ Toliau langelyje ```Build``` paspauskite ```Build Solution```
 ![](https://raw.githubusercontent.com/Step1st/2nd-Assignment/assets/vsbuild2.png)  
   
 Toliau jūsų aplankale turėtu atsirasti ```Release``` aplankalas kuriame ir bus pabaigtas programos failas
+
