@@ -1,42 +1,98 @@
 #include "Student.h"
+#include "StudentFile.h"
 #include "General.h"
 
 int main() {
     vector<student> group;  // student vector
+    vector<student> groupGood;  // student vector
+    vector<student> groupBad;  // student vector
     int n;                  // number of students
     bool run = true;        // used for while loops in main
     bool gradeNumber;       // flag for if grade number is known
-    string readfile;
-    string ansMedian;
+    char readfile;
+    char ansMedian;
+    char ansfile;
     cout << "Get students from file or enter manually?(f/m): ";
     do {
         cin >> readfile;
-        if (readfile == "f" || readfile == "F")
+        if (std::toupper(readfile) == 'F')
         {
-            cout << "Use median for final grade?(y/n): ";
+            cout << "Use exiting file or generate?(e/g): ";
+
             do {
-                cin >> ansMedian;
-                if (ansMedian == "y" || ansMedian == "Y")
+                cin >> ansfile;
+                if (std::toupper(ansfile) == 'E')
                 {
-                    bufferRead(group);
-                    finalGradeMedian(group, group.size());
-                    auto start3 = std::chrono::high_resolution_clock::now();
-                    cout << "Writing..." << endl;
-                    writeToFile(group, group.size(), true);
+                    cout << "Use median for final grade?(y/n): ";
+                    do {
+                        cin >> ansMedian;
+                        if (std::toupper(ansMedian) == 'Y')
+                        {
+                            bufferRead(group);
+                            auto start2 = std::chrono::high_resolution_clock::now();
+                            cout << "Calculating..." << endl;
+                            finalGradeMedian(group, group.size());
+                            std::chrono::duration<double> diff2 = std::chrono::high_resolution_clock::now() - start2;
+                            std::cout << "Calculating took " << diff2.count() << " s" << endl;
+                            auto start3 = std::chrono::high_resolution_clock::now();
+                            cout << "Writing..." << endl;
+                            writeToFile(group, group.size(), true);
+                            run = false;
+                            std::chrono::duration<double> diff3 = std::chrono::high_resolution_clock::now() - start3;
+                            std::cout << "Writing took " << diff3.count() << " s" << endl;
+                        }
+                        else if (std::toupper(ansMedian) == 'N')
+                        {
+                            bufferRead(group);
+                            auto start2 = std::chrono::high_resolution_clock::now();
+                            cout << "Calculating..." << endl;
+                            finalGradeAverage(group, group.size());
+                            std::chrono::duration<double> diff2 = std::chrono::high_resolution_clock::now() - start2;
+                            std::cout << "Calculating took " << diff2.count() << " s" << endl;
+                            auto start3 = std::chrono::high_resolution_clock::now();
+                            cout << "Writing..." << endl;
+                            writeToFile(group, group.size(), false);
+                            run = false;
+                            std::chrono::duration<double> diff3 = std::chrono::high_resolution_clock::now() - start3;
+                            std::cout << "Writing took " << diff3.count() << " s" << endl;
+                        }
+                        else
+                        {
+                            cout << endl;
+                            cout << "Error: bad entry" << endl;
+                            cout << "Try again(y/n): ";
+                            run = true;
+                        }
+                    } while (run);
                     run = false;
-                    std::chrono::duration<double> diff3 = std::chrono::high_resolution_clock::now() - start3; 
-                    std::cout << "Writing took " << diff3.count() << " s" << endl;
                 }
-                else if (ansMedian == "n" || ansMedian == "N")
+                else if (std::toupper(ansfile) == 'G')
                 {
+                    generateStudents();
                     bufferRead(group);
-                    finalGradeAverage(group, group.size());
+
+                    auto start2 = std::chrono::high_resolution_clock::now();
+                    cout << "Calculating..." << endl;
+
+                    finalGradeMedian(group, group.size());
+
+                    std::chrono::duration<double> diff2 = std::chrono::high_resolution_clock::now() - start2;
+                    std::cout << "Calculating took " << diff2.count() << " s" << endl;
+                    cout << "Sorting..." << endl;
+                    auto start = std::chrono::high_resolution_clock::now();
+
+                    sortStudents(group, groupGood, groupBad);
+
+                    std::chrono::duration<double> diff = std::chrono::high_resolution_clock::now() - start;
+                    std::cout << "Sorting took " << diff.count() << " s" << endl;
                     auto start3 = std::chrono::high_resolution_clock::now();
                     cout << "Writing..." << endl;
-                    writeToFile(group, group.size(), false);
-                    run = false;
-                    std::chrono::duration<double> diff3 = std::chrono::high_resolution_clock::now() - start3; 
+
+                    writeToFile(groupGood, groupBad, false);
+
+                    std::chrono::duration<double> diff3 = std::chrono::high_resolution_clock::now() - start3;
                     std::cout << "Writing took " << diff3.count() << " s" << endl;
+                    run = false;
                 }
                 else
                 {
@@ -45,12 +101,10 @@ int main() {
                     cout << "Try again(y/n): ";
                     run = true;
                 }
-            }
+            }             
             while (run);
-
-            run = false;
         }
-        else if (readfile == "m" || readfile == "M")
+        else if (std::toupper(readfile) == 'M')
         {
             cout << "Enter the number of students: ";
 
@@ -67,7 +121,7 @@ int main() {
                     cout << "Try again: ";
                     run = true;
                 }
-            } 
+            }             
             while (run);
 
             for (int i = 0; i < n; i++)
@@ -78,21 +132,19 @@ int main() {
                 do {
                     cin >> group[i].firstName;
                     cout << endl;
-                }
-                while (!validateName(group[i].firstName));
+                }                 while (!validateName(group[i].firstName));
 
                 cout << "Enter students last name: ";
                 do {
                     cin >> group[i].lastName;
                     cout << endl;
-                }
-                while (!validateName(group[i].lastName));
+                }                 while (!validateName(group[i].lastName));
 
-                string ansGrade;
+                char ansGrade;
                 cout << "Is the number of grades known?(y/n): ";
                 do {
                     cin >> ansGrade;
-                    if (ansGrade == "y" || ansGrade == "Y")
+                    if (std::toupper(ansGrade) == 'Y')
                     {
                         int temp;
                         cout << "Enter the number of grades: ";
@@ -109,7 +161,7 @@ int main() {
                                     cout << "Try again: ";
                                     run = true;
                                 }
-                            }                             while (run);
+                            } while (run);
 
                             if (temp > 0)
                             {
@@ -122,11 +174,10 @@ int main() {
                                 cout << "Try to enter your number again: ";
                                 run = true;
                             }
-                        } 
-                        while (run);
+                        }                         while (run);
                         gradeNumber = true;
                     }
-                    else if (ansGrade == "n" || ansGrade == "N")
+                    else if (std::toupper(ansGrade) == 'N')
                     {
                         cout << endl;
                         gradeNumber = false;
@@ -139,20 +190,19 @@ int main() {
                         cout << "Try again(y/n): ";
                         run = true;
                     }
-                }
-                while (run);
+                }                 while (run);
 
-                string ansRandom;
+                char ansRandom;
                 cout << "Generate grades randomly?(y/n): ";
                 do {
                     cin >> ansRandom;
-                    if (ansRandom == "y" || ansRandom == "Y")
+                    if (std::toupper(ansRandom) == 'Y')
                     {
                         cout << endl;
                         generateGrades(gradeNumber, group[i]);
                         run = false;
                     }
-                    else if (ansRandom == "n" || ansRandom == "N")
+                    else if (std::toupper(ansRandom) == 'N')
                     {
                         homeworkGrades(gradeNumber, group[i]);
                         cout << endl << "Enter students exam grade: ";
@@ -166,21 +216,20 @@ int main() {
                         cout << "Try again(y/n): ";
                         run = true;
                     }
-                }
-                while (run);
+                }                 while (run);
             }
             group.shrink_to_fit();
 
             cout << "Use median for final grade?(y/n): ";
             do {
                 cin >> ansMedian;
-                if (ansMedian == "y" || ansMedian == "Y")
+                if (std::toupper(ansMedian) == 'Y')
                 {
                     finalGradeMedian(group, n);
                     print(group, n, true);
                     run = false;
                 }
-                else if (ansMedian == "n" || ansMedian == "N")
+                else if (std::toupper(ansMedian) == 'N')
                 {
                     finalGradeAverage(group, n);
                     print(group, n, false);
@@ -193,8 +242,7 @@ int main() {
                     cout << "Try again(y/n): ";
                     run = true;
                 }
-            }
-            while (run);
+            }             while (run);
             run = false;
         }
         else
@@ -203,7 +251,6 @@ int main() {
             cout << "Error: bad entry" << endl;
             cout << "Try again(f/m): ";
         }
-    }
-    while (run);
+    }     while (run);
     system("pause");
 }

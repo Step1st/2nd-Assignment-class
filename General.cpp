@@ -40,7 +40,7 @@ string getDigits() {
         {
             valid = true;
         }
-    }     while (!valid);
+    } while (!valid);
 
     return number;
 }

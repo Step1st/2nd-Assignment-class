@@ -1,108 +1,6 @@
 #include "Student.h"
 #include "General.h"
 
-bool compareByLastName(const student& a, const student& b) {
-    return a.lastName < b.lastName;
-}
-
-void bufferRead(vector<student>& group) {
-    string eil;
-    student temp;
-    std::stringstream startBuffer;
-    std::stringstream lines;
-    std::fstream input;
-    int k;
-    auto start = std::chrono::high_resolution_clock::now();
-    cout << "Reading..." << endl;
-    try
-    {
-       input.open("kursiokai.txt");
-        if (input.fail())
-        {
-            throw 1;
-        }
-    }
-    catch (int e)
-    {
-        cout << "Failed to open file" << endl;
-        cout << "Make sure file 'kursiokai.txt' is in the right directory" << endl;
-        system("pause");
-        exit(e);
-    }
-    std::getline(input, eil);
-    startBuffer << input.rdbuf();
-    input.close();
-    std::chrono::duration<double> diff = std::chrono::high_resolution_clock::now() - start; 
-    std::cout << "Reading took " << diff.count() << " s" << endl;
-
-
-    auto start2 = std::chrono::high_resolution_clock::now();
-    cout << "Processing..." << endl;
-    while (startBuffer) {
-        if (!startBuffer.eof()) {
-            std::getline(startBuffer, eil);
-            lines << eil;
-
-            lines >> temp.firstName >> temp.lastName;
-
-            while (!lines.eof())
-            {
-                lines >> k;
-                temp.homeworkGrades.push_back(k);
-            }
-            lines.clear();
-            temp.examGrade = temp.homeworkGrades[temp.homeworkGrades.size() - 1];
-            temp.homeworkGrades.pop_back();
-            temp.homeworkGrades.shrink_to_fit();
-            temp.homeworkSize = temp.homeworkGrades.size();
-            group.push_back(temp);
-            temp = {};
-        }
-        else break;
-    }
-    startBuffer.clear();
-
-    std::sort(group.begin(), group.end(), compareByLastName);
-    std::chrono::duration<double> diff2 = std::chrono::high_resolution_clock::now() - start2; 
-    std::cout << "Processing took " << diff2.count() << " s" << endl;
-}
-
-void writeToFile(vector<student>& group, int n, bool isMedian) {
-    std::ofstream output("output.txt");
-    std::stringstream endBuffer;
-    if (isMedian)
-    {
-        endBuffer << "First name          Last name           Final grade(median)\n";
-        endBuffer << "----------------------------------------------------------\n";
-        auto start = std::chrono::high_resolution_clock::now();
-        for (int i = 0; i < n; i++)
-        {
-            endBuffer << std::setprecision(2) << std::fixed << group.at(i).firstName << string(20 - group.at(i).firstName.length(), ' ')
-                << group.at(i).lastName << string(21 - group.at(i).lastName.length(), ' ') << group.at(i).finalGrade << endl;
-        }
-        std::chrono::duration<double> diff = std::chrono::high_resolution_clock::now() - start;
-        std::cout << "writing to buffer took " << diff.count() << " s" << endl;
-    }
-    else
-    {
-        endBuffer << "First name          Last name           Final grade(average)\n";
-        endBuffer << "-----------------------------------------------------------\n";
-        auto start = std::chrono::high_resolution_clock::now();
-        for (int i = 0; i < n; i++)
-        {
-            endBuffer << std::setprecision(2) << std::fixed << group.at(i).firstName << string(20 - group.at(i).firstName.length(), ' ')
-                << group.at(i).lastName << string(21 - group.at(i).lastName.length(), ' ') << group.at(i).finalGrade << endl;
-        }
-        std::chrono::duration<double> diff = std::chrono::high_resolution_clock::now() - start;
-        std::cout << "writing to buffer took " << diff.count() << " s" << endl;
-    }
-
-    output << endBuffer.str();
-    output.close();
-}
-
-
-
 void homeworkGrades(bool gradeNumber, student& Student) {
     bool run = true;
     string Grade;
@@ -133,8 +31,7 @@ void homeworkGrades(bool gradeNumber, student& Student) {
                     cout << "Error: invalid grade" << endl;
                     run = true;
                 }
-            }
-            while (run);
+            }             while (run);
         }
     }
     else
@@ -143,7 +40,7 @@ void homeworkGrades(bool gradeNumber, student& Student) {
         do {
             cout << Student.homeworkGrades.size() + 1 << ". Enter grade: ";
             cin >> Grade;
-            
+
             if (Grade == "end" || Grade == "END")
             {
                 Student.homeworkSize = Student.homeworkGrades.size();
@@ -152,11 +49,11 @@ void homeworkGrades(bool gradeNumber, student& Student) {
             }
             else
             {
-                try 
+                try
                 {
                     temp = std::stoi(Grade);
 
-                    if ( temp <= 10 && temp >= 0)
+                    if (temp <= 10 && temp >= 0)
                     {
                         Student.homeworkGrades.push_back(temp);
                     }
@@ -176,8 +73,7 @@ void homeworkGrades(bool gradeNumber, student& Student) {
                 cout << "Error! Please enter at least one grade" << endl;
                 run = true;
             }
-        }
-        while (run);
+        }         while (run);
     }
 }
 
@@ -207,7 +103,7 @@ int getExam() {
         {
             valid = true;
         }
-    }     while (!valid);
+    } while (!valid);
 
     return Grade;
 }
@@ -276,21 +172,16 @@ void print(vector<student>& group, int n, bool isMedian) {
     if (isMedian)
     {
         cout << "First name          Last name           Final grade(median)" << endl;
-        cout << "----------------------------------------------------------" << endl;
-        for (int i = 0; i < n; i++)
-        {
-            cout << std::setprecision(2) << std::fixed << group[i].firstName << string(20 - group[i].firstName.length(), ' ')
-                << group[i].lastName << string(21 - group[i].lastName.length(), ' ') << group[i].finalGrade << endl;
-        }
     }
     else
     {
         cout << "First name          Last name           Final grade(average)" << endl;
-        cout << "-----------------------------------------------------------" << endl;
-        for (int i = 0; i < n; i++)
-        {
-            cout << std::setprecision(2) << std::fixed << group[i].firstName << string(20 - group[i].firstName.length(), ' ')
-                << group[i].lastName << string(21 - group[i].lastName.length(), ' ') << group[i].finalGrade << endl;
-        }
     }
+    cout << "-----------------------------------------------------------" << endl;
+    for (int i = 0; i < n; i++)
+     {
+        cout << std::setprecision(2) << std::fixed << group[i].firstName << string(20 - group[i].firstName.length(), ' ')
+             << group[i].lastName << string(21 - group[i].lastName.length(), ' ') << group[i].finalGrade << endl;
+    }
+    
 }

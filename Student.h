@@ -4,6 +4,7 @@
 #include <iostream>
 #include <ios>
 #include <string>
+#include <cctype>
 #include <algorithm>
 #include <iomanip>
 #include <chrono>
@@ -39,9 +40,7 @@ void generateGrades(bool, student&);
 void finalGradeAverage(vector<student>&, int);
 void finalGradeMedian(vector<student>&, int);
 void print(vector<student>&, int, bool);
-void bufferRead(vector<student>&);
-bool compareByLastName(const student&, const student&);
-void writeToFile(vector<student>&, int, bool);
+
 
 
 #endif // STUDENT_H_INCLUDED
