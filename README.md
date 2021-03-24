@@ -133,7 +133,7 @@ Vardenis            Pavardenis           9.40
 
 #### Testavimo sistemos parametrai:
   CPU: Intel Core i7-10710U  
-  Ram: 2 x SK Hynix DDR4-2666 8GB  
+  RAM: 2 x SK Hynix DDR4-2666 8GB  
   SSD: Western Digital PC SN520 NVMe 512GB  
 
 #### Testavimo rezultatai:
