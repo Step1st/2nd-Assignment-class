@@ -199,8 +199,10 @@ void sortStudents(vector<student>& group, vector<student>& groupGood, vector<stu
     std::sort(group.begin(), group.end(), compareByFinalGrade);
     auto it = std::find_if(group.begin(), group.end(), isGood);
 
-    std::move(it, group.end(), std::back_inserter(groupGood));
-    std::move(group.begin(), it, std::back_inserter(groupBad));
+    std::copy(it, group.end(), std::back_inserter(groupGood));
+    std::copy(group.begin(), it, std::back_inserter(groupBad));
+
+    group.erase(group.begin(), group.end());
 
     std::sort(groupGood.begin(), groupGood.end(), compareByLastName);
     std::sort(groupBad.begin(), groupBad.end(), compareByLastName);
