@@ -40,7 +40,7 @@ void bufferRead(vector<student>& group) {
     startBuffer << input.rdbuf();
     input.close();
 
-    
+
     while (startBuffer) {
         if (!startBuffer.eof()) {
             std::getline(startBuffer, eil);
@@ -153,11 +153,11 @@ void generateStudents() {
     std::mt19937 generator(seed);
     std::uniform_int_distribution<int> distribution(0, 10);
     std::uniform_int_distribution<int> distributionSize(2, 20);
-   
+
 
     cout << "Enter the number of students: ";
     do {
-        try 
+        try
         {
             n = std::stoi(getDigits());
             run = false;
@@ -168,8 +168,7 @@ void generateStudents() {
             cout << "Try again: ";
             run = true;
         }
-    }     
-    while (run);
+    }     while (run);
 
     cout << "Generating..." << endl;
     auto start = std::chrono::high_resolution_clock::now();
@@ -181,7 +180,7 @@ void generateStudents() {
 
         endBuffer << endl;
         int b = log10(i) + 1;
-        endBuffer << "Vardas" << i << string (25-(6+b),' ') << "Pavarde" << i << string(25 - (7 + b), ' ');
+        endBuffer << "Vardas" << i << string(25 - (6 + b), ' ') << "Pavarde" << i << string(25 - (7 + b), ' ');
         for (int j = 0; j < a; j++)
         {
             endBuffer << distribution(generator) << "    ";
@@ -195,6 +194,34 @@ void generateStudents() {
 }
 
 void sortStudents(vector<student>& group, vector<student>& groupGood, vector<student>& groupBad) {
+
+    std::sort(group.begin(), group.end(), compareByFinalGrade);
+    auto it = std::find_if(group.begin(), group.end(), isGood);
+
+    std::copy(it, group.end(), std::back_inserter(groupGood));
+    std::copy(group.begin(), it, std::back_inserter(groupBad));
+
+    group.erase(group.begin(), group.end());
+
+    std::sort(groupGood.begin(), groupGood.end(), compareByLastName);
+    std::sort(groupBad.begin(), groupBad.end(), compareByLastName);
+}
+
+void sortStudents(list<student>& group, list<student>& groupGood, list<student>& groupBad) {
+
+    group.sort(compareByFinalGrade);
+    auto it = std::find_if(group.begin(), group.end(), isGood);
+
+    std::copy(it, group.end(), std::back_inserter(groupGood));
+    std::copy(group.begin(), it, std::back_inserter(groupBad));
+
+    group.erase(group.begin(), group.end());
+
+    groupGood.sort(compareByLastName);
+    groupBad.sort(compareByLastName);
+}
+
+void sortStudents(deque<student>& group, deque<student>& groupGood, deque<student>& groupBad) {
 
     std::sort(group.begin(), group.end(), compareByFinalGrade);
     auto it = std::find_if(group.begin(), group.end(), isGood);
