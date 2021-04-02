@@ -131,6 +131,38 @@ Steponas            Tolomanovas          9.00
 Vardenis            Pavardenis           9.40
 ```
 ## Testavimas
+#### Testavimo rėžimas
+Paleisti testavimo rėžimą galima per komandine eilutė į vedus flag’ą ```test``` ir konteinerį norimą patikrinti.
+```
+C:\Users\stolo\source\repos\v0.5\x64\Release>v0.5 test vector
+```
+Paleidus testavimo rėžimą programoje bus sugeneruoti `1000, 10000, 1000000, 10000000` studentų failai ir išmatuotas jų apdorojimo laikas pasirinktam konteineriui. Jeigu studentų failai jau egzistuoja nauji nebus generuojami.
+
+```
+C:\Users\stolo\source\repos\v0.5\x64\Release>v0.5 test vector
+Generating...
+Generating 1000 took 0.023594 s
+Generating...
+Generating 10000 took 0.0613205 s
+Generating...
+Generating 100000 took 0.52451 s
+Generating...
+Generating 1000000 took 5.195 s
+Generating...
+Generating 10000000 took 51.0129 s
+
+Vector
+Reading...
+Reading took 0.009010 s
+Calculating...
+Calculating took 0.000577 s
+Sorting...
+Sorting took 0.000914 s
+Writing...
+writing to buffer took 0.001047 s
+Writing took 0.013780 s
+...
+```
 
 #### Testavimo sistemos parametrai:
   CPU: Intel Core i7-10710U  
@@ -159,7 +191,7 @@ Vardenis            Pavardenis           9.40
 | 1000000          |    6.50563 s      |     0.0593183 s     |    1.48599 s     |   0.8731 s              |     1.21993 s         |
 | 10000000         |      65.8759 s    |     0.619371 s      |  20.5131 s       |   8.71794 s             |        12.2231        |
 
-#### Deque
+#### Deque:
 
 |Studentų skaičius | Nuskaitymo laikas | Skaičiavimas laikas | Rūšiavimo laikas | Įrašimo į buferį laikas | Pilnas įrašimo laikas |
 | ---------------- | ----------------- | ------------------- | ---------------- | ----------------------- | --------------------- | 
