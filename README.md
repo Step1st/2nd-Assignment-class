@@ -131,12 +131,12 @@ Steponas            Tolomanovas          9.00
 Vardenis            Pavardenis           9.40
 ```
 ## Testavimas
-#### Testavimo rėžimas
-Paleisti testavimo rėžimą galima per komandine eilutė į vedus flag’ą ```test``` ir konteinerį norimą patikrinti.
+#### Testavimo režimas
+Paleisti testavimo režimą galima per komandine eilutė į vedus flag’ą ```test``` ir konteinerį norimą patikrinti.
 ```
 C:\Users\stolo\source\repos\v0.5\x64\Release>v0.5 test vector
 ```
-Paleidus testavimo rėžimą programoje bus sugeneruoti `1000, 10000, 1000000, 10000000` studentų failai ir išmatuotas jų apdorojimo laikas pasirinktam konteineriui. Jeigu studentų failai jau egzistuoja nauji nebus generuojami.
+Paleidus testavimo režimą programoje bus sugeneruoti `1000, 10000, 1000000, 10000000` studentų failai ir išmatuotas jų apdorojimo laikas pasirinktam konteineriui. Jeigu studentų failai jau egzistuoja nauji nebus generuojami.
 
 ```
 C:\Users\stolo\source\repos\v0.5\x64\Release>v0.5 test vector
