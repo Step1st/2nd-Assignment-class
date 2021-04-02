@@ -3,7 +3,8 @@
 [v0.1](https://github.com/Step1st/2nd-Assignment/tree/v0.1)  
 [v0.2](https://github.com/Step1st/2nd-Assignment/tree/v0.2)  
 [v0.3](https://github.com/Step1st/2nd-Assignment/tree/v0.3)  
-[v0.4](https://github.com/Step1st/2nd-Assignment/tree/v0.4)
+[v0.4](https://github.com/Step1st/2nd-Assignment/tree/v0.4)  
+[v0.5](https://github.com/Step1st/2nd-Assignment/tree/v0.5)
 
 ##  Programos naudojimas ir veikimo principas
 ### Veikimo princimas
@@ -138,13 +139,35 @@ Vardenis            Pavardenis           9.40
 
 #### Testavimo rezultatai:
 
-|Studentų skaičius | Generavimo laikas | Nuskaitymo laikas | Skaičiavimas laikas | Rūšiavimo laikas | Įrašimo į buferį laikas | Pilnas įrašimo laikas |
-| ---------------- | ----------------- | ----------------- | ------------------- | ---------------- | ----------------------- | --------------------- | 
-| 1000             | 0.051983 s        | 0.0105604 s       | 0.0003101 s         | 0.0006044 s      | 0.0009792 s             | 0.0137528 s           |
-| 10000            |  0.102473 s       |  0.0796106 s      |    0.0020251 s      |   0.0052371 s    |    0.0083455 s          |    0.0250293 s        |
-| 100000           |  0.643024 s       |    0.780164 s     |     0.0179028 s     |      0.0642483 s |  0.0823578 s            |   0.100065 s          |
-| 1000000          |  6.07747 s        |    7.89065 s      |     0.175481 s      |    0.764148 s    |   0.81658 s             |     0.94163 s         |
-| 10000000         |  59.9028 s        |      78.8786 s    |     1.75618 s       |  8.64761 s       |   8.10971 s             |        9.09845 s      |
+#### Vector:
+
+|Studentų skaičius |  Nuskaitymo laikas | Skaičiavimas laikas | Rūšiavimo laikas | Įrašimo į buferį laikas | Pilnas įrašimo laikas |
+| ---------------- |  ----------------- | ------------------- | ---------------- | ----------------------- | --------------------- | 
+| 1000             |  0.0353497 s       | 0.000225 s          | 0.0010648 s      | 0.0009733 s             | 0.022296 s            |
+| 10000            |    0.0721342 s     |    0.0010962 s      |   0.0052371 s    |    0.0083455 s          |    0.0250293 s        |
+| 100000           |     0.686503 s     |     0.0034008 s     |      0.0954395 s |  0.081143 s             |   0.106562 s          |
+| 1000000          |   6.90946 s        |    0.0220216 s      |    1.12152 s     |   0.799415 s            |    1.00997 s          |
+| 10000000         |       70.8632 s    |     0.272733 s      | 12.8804 s        |   7.99633 s             |       10.5594 s       |
+
+#### List:
+
+|Studentų skaičius | Nuskaitymo laikas | Skaičiavimas laikas | Rūšiavimo laikas | Įrašimo į buferį laikas | Pilnas įrašimo laikas |
+| ---------------- | ----------------- | ------------------- | ---------------- | ----------------------- | --------------------- |
+| 1000             | 0.0068402 s       | 0.0001927 s         | 0.0004039 s      | 0.0008633 s             | 0.0134239 s           |
+| 10000            |  0.0658105 s      |    0.0006487 s      |   0.0050253 s    |    0.0086414 s          |    0.0282394 s        |
+| 100000           |    0.651334 s     |     0.005143 s      |      0.0934613 s |  0.0933846 s            |   0.129447 s          |
+| 1000000          |    6.50563 s      |     0.0593183 s     |    1.48599 s     |   0.8731 s              |     1.21993 s         |
+| 10000000         |      65.8759 s    |     0.619371 s      |  20.5131 s       |   8.71794 s             |        12.2231        |
+
+#### Deque
+
+|Studentų skaičius | Nuskaitymo laikas | Skaičiavimas laikas | Rūšiavimo laikas | Įrašimo į buferį laikas | Pilnas įrašimo laikas |
+| ---------------- | ----------------- | ------------------- | ---------------- | ----------------------- | --------------------- | 
+| 1000             | 0.0081628 s       | 0.0005872 s         | 0.0010862 s      | 0.0009901 s             | 0.0136431 s           |
+| 10000            |  0.0713746 s      |    0.0017012 s      |   0.0083788 s    |    0.0083946 s          |    0.0267434 s        |
+| 100000           |    0.706195 s     |     0.00405 s       |      0.124205 s  |  0.0856192 s            |   0.116703 s          |
+| 1000000          |    7.20883 s      |     0.0515288 s     |   1.49856 s      |   0.855429 s            |     1.09735 s         |
+| 10000000         |     74.4758 s     |     0.534967 s      | 18.6328 s        |   8.46752 s             |     12.5377 s         |
 
 ## Įdiegimas
 Visus atsiustus failus įdėkite į viena atskyra aplankalą ir *v0.4.sln* failą atidarykite su Visual Studio.  
