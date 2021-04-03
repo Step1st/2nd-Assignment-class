@@ -4,6 +4,7 @@
 #include <iostream>
 #include <ios>
 #include <string>
+#include <filesystem>
 #include <cctype>
 #include <algorithm>
 #include <iomanip>
@@ -16,12 +17,17 @@
 #include <sstream>
 #include <iterator>
 #include <exception>
+#include <list>
+#include <deque>
+#include <direct.h>
 
 using std::cout;
 using std::cin;
 using std::endl;
 using std::string;
 using std::vector;
+using std::list;
+using std::deque;
 
 struct student
 {
@@ -37,7 +43,9 @@ bool validateName(string);
 string getDigits();
 int getExam();
 void generateGrades(bool, student&);
-void finalGradeAverage(vector<student>&, int);
+void finalGradeAverage(vector<student>& group, int n);
+void finalGradeAverage(list<student>& group, int n);
+void finalGradeAverage(deque<student>& group, int n);
 void finalGradeMedian(vector<student>&, int);
 void print(vector<student>&, int, bool);
 

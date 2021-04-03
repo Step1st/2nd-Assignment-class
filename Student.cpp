@@ -135,19 +135,50 @@ void generateGrades(bool gradeNumber, student& Student) {
 
 //Calculates final grade with average grade
 
+
+
 void finalGradeAverage(vector<student>& group, int n) {
     double average;
-    for (int i = 0; i < n; i++)
+    for (student& i : group)
     {
         average = 0;
-        for (int j = 0; j < group[i].homeworkSize; j++)
+        for (int j = 0; j < i.homeworkSize; j++)
         {
-            average = average + group[i].homeworkGrades[j];
+            average = average + i.homeworkGrades[j];
         }
-        average = average / group[i].homeworkSize;
-        group[i].finalGrade = (average * 0.4) + (group[i].examGrade * 0.6);
+        average = average / i.homeworkSize;
+        i.finalGrade = (average * 0.4) + (i.examGrade * 0.6);
     }
 }
+
+void finalGradeAverage(list<student>& group, int n) {
+    double average;
+    for (student& i : group)
+    {
+        average = 0;
+        for (int j = 0; j < i.homeworkSize; j++)
+        {
+            average = average + i.homeworkGrades[j];
+        }
+        average = average / i.homeworkSize;
+        i.finalGrade = (average * 0.4) + (i.examGrade * 0.6);
+    }
+}
+
+void finalGradeAverage(deque<student>& group, int n) {
+    double average;
+    for (student& i : group)
+    {
+        average = 0;
+        for (int j = 0; j < i.homeworkSize; j++)
+        {
+            average = average + i.homeworkGrades[j];
+        }
+        average = average / i.homeworkSize;
+        i.finalGrade = (average * 0.4) + (i.examGrade * 0.6);
+    }
+}
+
 
 //Calculates final grade with median
 
