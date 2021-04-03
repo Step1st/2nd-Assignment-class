@@ -212,3 +212,4 @@ Toliau langelyje ```Build``` paspauskite ```Build Solution```
 ![](https://raw.githubusercontent.com/Step1st/2nd-Assignment/assets/vsbuild2.png)  
   
 Toliau jūsų aplankale turėtu atsirasti ```Release``` aplankalas kuriame ir bus pabaigtas programos failas
+
