@@ -104,7 +104,6 @@ void writeToFile(vector<student>& groupGood, vector<student>& groupBad, bool isM
     std::stringstream endBuffer1;
     std::stringstream endBuffer2;
 
-
     if (isMedian)
     {
         endBuffer1 << "First name          Last name           Final grade(median)\n";
@@ -193,20 +192,6 @@ void generateStudents() {
     std::cout << "Generating took " << diff.count() << " s" << endl;
 }
 
-void sortStudents(vector<student>& group, vector<student>& groupGood, vector<student>& groupBad) {
-
-    std::sort(group.begin(), group.end(), compareByFinalGrade);
-    auto it = std::find_if(group.begin(), group.end(), isGood);
-
-    std::copy(it, group.end(), std::back_inserter(groupGood));
-    std::copy(group.begin(), it, std::back_inserter(groupBad));
-
-    group.erase(group.begin(), group.end());
-
-    std::sort(groupGood.begin(), groupGood.end(), compareByLastName);
-    std::sort(groupBad.begin(), groupBad.end(), compareByLastName);
-}
-
 void sortStudents(list<student>& group, list<student>& groupGood, list<student>& groupBad) {
 
     group.sort(compareByFinalGrade);
@@ -219,18 +204,4 @@ void sortStudents(list<student>& group, list<student>& groupGood, list<student>&
 
     groupGood.sort(compareByLastName);
     groupBad.sort(compareByLastName);
-}
-
-void sortStudents(deque<student>& group, deque<student>& groupGood, deque<student>& groupBad) {
-
-    std::sort(group.begin(), group.end(), compareByFinalGrade);
-    auto it = std::find_if(group.begin(), group.end(), isGood);
-
-    std::copy(it, group.end(), std::back_inserter(groupGood));
-    std::copy(group.begin(), it, std::back_inserter(groupBad));
-
-    group.erase(group.begin(), group.end());
-
-    std::sort(groupGood.begin(), groupGood.end(), compareByLastName);
-    std::sort(groupBad.begin(), groupBad.end(), compareByLastName);
 }
