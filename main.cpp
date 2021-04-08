@@ -24,36 +24,35 @@ int main(int argc, char* argv[]) {
 
     if (argc > 1 && strcmp(argv[1], "test") == 0)
     {
-        _mkdir(dir);
-        generateStudents(1000, fileName);
-        generateStudents(10000, fileName);
-        generateStudents(100000, fileName);
-        generateStudents(1000000, fileName);
-        generateStudents(10000000, fileName);
+        int dir_ = _mkdir(dir);
+        for (int i = 1000; i <= 10000000; i = i * 10)
+        {
+            generateStudents(i, fileName);
+        }
 
         if (argc > 2 && strcmp(argv[2], "vector") == 0)
         {
-            testVector(group, groupGood, groupBad, fileName, 1000);
-            testVector(group, groupGood, groupBad, fileName, 10000);
-            testVector(group, groupGood, groupBad, fileName, 100000);
-            testVector(group, groupGood, groupBad, fileName, 1000000);
-            testVector(group, groupGood, groupBad, fileName, 10000000);
+            for (int i = 1000; i <= 10000000; i = i * 10)
+            {
+                cout << "\nVector\n";
+                Test(group, groupGood, groupBad, fileName, i);
+            }
         }
         else if (argc > 2 && strcmp(argv[2], "list") == 0)
         {
-            testList(lgroup, lgroupGood, lgroupBad, fileName, 1000);
-            testList(lgroup, lgroupGood, lgroupBad, fileName, 10000);
-            testList(lgroup, lgroupGood, lgroupBad, fileName, 100000);
-            testList(lgroup, lgroupGood, lgroupBad, fileName, 1000000);
-            testList(lgroup, lgroupGood, lgroupBad, fileName, 10000000);
+            for (int i = 1000; i <= 10000000; i = i * 10)
+            {
+                cout << "\nList\n";
+                Test(lgroup, lgroupGood, lgroupBad, fileName, i);
+            }
         }
         else if (argc > 2 && strcmp(argv[2], "deque") == 0)
         {
-            testDeque(dgroup, dgroupGood, dgroupBad, fileName, 1000);
-            testDeque(dgroup, dgroupGood, dgroupBad, fileName, 10000);
-            testDeque(dgroup, dgroupGood, dgroupBad, fileName, 100000);
-            testDeque(dgroup, dgroupGood, dgroupBad, fileName, 1000000);
-            testDeque(dgroup, dgroupGood, dgroupBad, fileName, 10000000);
+            for (int i = 1000; i <= 10000000; i = i * 10)
+            {
+                cout << "\nDeque\n";
+                Test(dgroup, dgroupGood, dgroupBad, fileName, i);
+            }
         }
         else 
         {
@@ -305,5 +304,3 @@ int main(int argc, char* argv[]) {
         system("pause");
     }
 }
-
-

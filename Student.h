@@ -4,7 +4,6 @@
 #include <iostream>
 #include <ios>
 #include <string>
-#include <filesystem>
 #include <cctype>
 #include <algorithm>
 #include <iomanip>
@@ -20,6 +19,7 @@
 #include <list>
 #include <deque>
 #include <direct.h>
+
 
 using std::cout;
 using std::cin;
@@ -43,12 +43,35 @@ bool validateName(string);
 string getDigits();
 int getExam();
 void generateGrades(bool, student&);
-void finalGradeAverage(vector<student>& group, int n);
-void finalGradeAverage(list<student>& group, int n);
-void finalGradeAverage(deque<student>& group, int n);
-void finalGradeMedian(vector<student>&, int);
+
 void print(vector<student>&, int, bool);
 
-
-
+template <class T>
+void finalGradeAverage(T& group, int n) {
+    double average;
+    for (student& i : group)
+    {
+        average = 0;
+        for (int j = 0; j < i.homeworkSize; j++)
+        {
+            average = average + i.homeworkGrades[j];
+        }
+        average = average / i.homeworkSize;
+        i.finalGrade = (average * 0.4) + (i.examGrade * 0.6);
+    }
+}
+template <class T>
+void finalGradeMedian(T& group, int n) {
+    double median;
+    for (student& i : group)
+    {
+        std::sort(i.homeworkGrades.begin(), i.homeworkGrades.end());
+        median = i.homeworkGrades[(i.homeworkSize / 2)];
+        if (i.homeworkSize % 2 == 0)
+        {
+            median = (median + i.homeworkGrades[(i.homeworkSize / 2) - 1]) / 2;
+        }
+        i.finalGrade = (median * 0.4) + (i.examGrade * 0.6);
+    }
+}
 #endif // STUDENT_H_INCLUDED

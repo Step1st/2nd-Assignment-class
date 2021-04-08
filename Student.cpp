@@ -136,66 +136,6 @@ void generateGrades(bool gradeNumber, student& Student) {
 //Calculates final grade with average grade
 
 
-
-void finalGradeAverage(vector<student>& group, int n) {
-    double average;
-    for (student& i : group)
-    {
-        average = 0;
-        for (int j = 0; j < i.homeworkSize; j++)
-        {
-            average = average + i.homeworkGrades[j];
-        }
-        average = average / i.homeworkSize;
-        i.finalGrade = (average * 0.4) + (i.examGrade * 0.6);
-    }
-}
-
-void finalGradeAverage(list<student>& group, int n) {
-    double average;
-    for (student& i : group)
-    {
-        average = 0;
-        for (int j = 0; j < i.homeworkSize; j++)
-        {
-            average = average + i.homeworkGrades[j];
-        }
-        average = average / i.homeworkSize;
-        i.finalGrade = (average * 0.4) + (i.examGrade * 0.6);
-    }
-}
-
-void finalGradeAverage(deque<student>& group, int n) {
-    double average;
-    for (student& i : group)
-    {
-        average = 0;
-        for (int j = 0; j < i.homeworkSize; j++)
-        {
-            average = average + i.homeworkGrades[j];
-        }
-        average = average / i.homeworkSize;
-        i.finalGrade = (average * 0.4) + (i.examGrade * 0.6);
-    }
-}
-
-
-//Calculates final grade with median
-
-void finalGradeMedian(vector<student>& group, int n) {
-    double median;
-    for (int i = 0; i < n; i++)
-    {
-        std::sort(group[i].homeworkGrades.begin(), group[i].homeworkGrades.end());
-        median = group[i].homeworkGrades[(group[i].homeworkSize / 2)];
-        if (group[i].homeworkSize % 2 == 0)
-        {
-            median = (median + group[i].homeworkGrades[(group[i].homeworkSize / 2) - 1]) / 2;
-        }
-        group[i].finalGrade = (median * 0.4) + (group[i].examGrade * 0.6);
-    }
-}
-
 //Prints results
 
 void print(vector<student>& group, int n, bool isMedian) {
