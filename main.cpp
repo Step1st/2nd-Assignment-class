@@ -24,8 +24,10 @@ int main(int argc, char* argv[]) {
 
     if (argc > 1 && strcmp(argv[1], "test1") == 0)
     {
+        string test = "test";
         string dir = "test/method_1";
-        int dir_ = _mkdir(dir.c_str());
+        int dir_ = _mkdir(test.c_str());
+        int dir__ = _mkdir(dir.c_str());
         for (int i = 1000; i <= 10000000; i = i * 10)
         {
             generateStudents(i, fileName);
@@ -63,8 +65,10 @@ int main(int argc, char* argv[]) {
     }
     else if (argc > 1 && strcmp(argv[1], "test2") == 0)
     {
+        string test = "test";
         string dir = "test/method_2";
-        int dir_ = _mkdir(dir.c_str());
+        int dir_ = _mkdir(test.c_str());
+        int dir__ = _mkdir(dir.c_str());
         for (int i = 1000; i <= 10000000; i = i * 10)
         {
             generateStudents(i, fileName);

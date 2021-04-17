@@ -14,7 +14,6 @@ void bufferRead(T& group, string fileName, int n) {
     std::stringstream startBuffer;
     std::stringstream lines;
     std::fstream input;
-    std::ofstream log("test/log.txt");
 
     int k;
     int t = 1;
@@ -44,7 +43,6 @@ void bufferRead(T& group, string fileName, int n) {
                 std::getline(startBuffer, eil);
                 lines << eil;
                 lines >> temp.firstName >> temp.lastName;
-                log << temp.firstName << temp.lastName;
                 while (!lines.eof()) {
                     lines >> k;
                     temp.homeworkGrades.push_back(k);
