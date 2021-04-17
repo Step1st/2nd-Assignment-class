@@ -16,6 +16,7 @@ bool compareByFinalGrade(const student&, const student&);
 bool isGood(const student&);
 
 void sortStudents(list<student>&, list<student>&, list<student>&);
+void sortStudents2(list<student>&, list<student>&);
 
 template <class T>
 void sortStudents(T& group, T& groupGood, T& groupBad) {
@@ -26,7 +27,20 @@ void sortStudents(T& group, T& groupGood, T& groupBad) {
     std::copy(it, group.end(), std::back_inserter(groupGood));
     std::copy(group.begin(), it, std::back_inserter(groupBad));
 
-    group.erase(group.begin(), group.end());
+    std::sort(groupGood.begin(), groupGood.end(), compareByLastName);
+    std::sort(groupBad.begin(), groupBad.end(), compareByLastName);
+}
+
+
+template <class T>
+void sortStudents2(T& groupBad, T& groupGood) {
+
+    std::sort(groupBad.begin(), groupBad.end(), compareByFinalGrade);
+    auto it = std::find_if(groupBad.begin(), groupBad.end(), isGood);
+
+    std::copy(it, groupBad.end(), std::back_inserter(groupGood));
+
+    groupBad.erase(it, groupBad.end());
 
     std::sort(groupGood.begin(), groupGood.end(), compareByLastName);
     std::sort(groupBad.begin(), groupBad.end(), compareByLastName);

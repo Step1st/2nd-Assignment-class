@@ -88,11 +88,11 @@ void writeToFile(vector<student>& group, int n, bool isMedian) {
     for (int i = 0; i < n; i++)
     {
         endBuffer << std::setprecision(2) << std::fixed << group.at(i).firstName << string(20 - group.at(i).firstName.length(), ' ')
-        << group.at(i).lastName << string(21 - group.at(i).lastName.length(), ' ') << group.at(i).finalGrade << endl;
+                  << group.at(i).lastName << string(21 - group.at(i).lastName.length(), ' ') << group.at(i).finalGrade << endl;
     }
     std::chrono::duration<double> diff = std::chrono::high_resolution_clock::now() - start;
     std::cout << "writing to buffer took " << diff.count() << " s" << endl;
-   
+
     output << endBuffer.str();
     output.close();
 }
@@ -100,7 +100,7 @@ void writeToFile(vector<student>& group, int n, bool isMedian) {
 
 void writeToFile(vector<student>& groupGood, vector<student>& groupBad, bool isMedian) {
     std::ofstream output1("kietiakiai.txt");
-    std::ofstream output2("vargöiukai.txt");
+    std::ofstream output2("varg≈°iukai.txt");
     std::stringstream endBuffer1;
     std::stringstream endBuffer2;
 
@@ -122,13 +122,13 @@ void writeToFile(vector<student>& groupGood, vector<student>& groupBad, bool isM
     for (student& i : groupGood)
     {
         endBuffer1 << std::setprecision(2) << std::fixed << i.firstName << string(20 - i.firstName.length(), ' ')
-            << i.lastName << string(21 - i.lastName.length(), ' ') << i.finalGrade << endl;
+                   << i.lastName << string(21 - i.lastName.length(), ' ') << i.finalGrade << endl;
     }
 
     for (student& i : groupBad)
     {
         endBuffer2 << std::setprecision(2) << std::fixed << i.firstName << string(20 - i.firstName.length(), ' ')
-            << i.lastName << string(21 - i.lastName.length(), ' ') << i.finalGrade << endl;
+                   << i.lastName << string(21 - i.lastName.length(), ' ') << i.finalGrade << endl;
     }
     std::chrono::duration<double> diff = std::chrono::high_resolution_clock::now() - start;
     std::cout << "writing to buffer took " << diff.count() << " s" << endl;
@@ -200,7 +200,18 @@ void sortStudents(list<student>& group, list<student>& groupGood, list<student>&
     std::copy(it, group.end(), std::back_inserter(groupGood));
     std::copy(group.begin(), it, std::back_inserter(groupBad));
 
-    group.erase(group.begin(), group.end());
+    groupGood.sort(compareByLastName);
+    groupBad.sort(compareByLastName);
+}
+
+void sortStudents2(list<student>& groupBad, list<student>& groupGood) {
+
+    groupBad.sort(compareByFinalGrade);
+    auto it = std::find_if(groupBad.begin(), groupBad.end(), isGood);
+
+    std::copy(it, groupBad.end(), std::back_inserter(groupGood));
+
+    groupBad.erase(it, groupBad.end());
 
     groupGood.sort(compareByLastName);
     groupBad.sort(compareByLastName);

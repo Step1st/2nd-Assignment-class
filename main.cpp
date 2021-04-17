@@ -1,3 +1,4 @@
+
 #include "Student.h"
 #include "StudentFile.h"
 #include "General.h"
@@ -5,14 +6,14 @@
 
 int main(int argc, char* argv[]) {
     vector<student> group;  // student vector
-    vector<student> groupGood;  
-    vector<student> groupBad;  
-    list<student> lgroup;  
-    list<student> lgroupGood;  
-    list<student> lgroupBad;  
-    deque<student> dgroup;  
-    deque<student> dgroupGood;  
-    deque<student> dgroupBad;  
+    vector<student> groupGood;
+    vector<student> groupBad;
+    list<student> lgroup;
+    list<student> lgroupGood;
+    list<student> lgroupBad;
+    deque<student> dgroup;
+    deque<student> dgroupGood;
+    deque<student> dgroupBad;
     string fileName = "test/kursiokai";
     int n;                  // number of students
     bool run = true;        // used for while loops in main
@@ -20,11 +21,13 @@ int main(int argc, char* argv[]) {
     char readfile;
     char ansMedian;
     char ansfile;
-    const char* dir = "test";
 
-    if (argc > 1 && strcmp(argv[1], "test") == 0)
+    if (argc > 1 && strcmp(argv[1], "test1") == 0)
     {
-        int dir_ = _mkdir(dir);
+        string test = "test";
+        string dir = "test/method_1";
+        int dir_ = _mkdir(test.c_str());
+        int dir__ = _mkdir(dir.c_str());
         for (int i = 1000; i <= 10000000; i = i * 10)
         {
             generateStudents(i, fileName);
@@ -35,7 +38,7 @@ int main(int argc, char* argv[]) {
             for (int i = 1000; i <= 10000000; i = i * 10)
             {
                 cout << "\nVector\n";
-                Test(group, groupGood, groupBad, fileName, i);
+                Test(group, groupGood, groupBad, fileName, i, dir);
             }
         }
         else if (argc > 2 && strcmp(argv[2], "list") == 0)
@@ -43,7 +46,7 @@ int main(int argc, char* argv[]) {
             for (int i = 1000; i <= 10000000; i = i * 10)
             {
                 cout << "\nList\n";
-                Test(lgroup, lgroupGood, lgroupBad, fileName, i);
+                Test(lgroup, lgroupGood, lgroupBad, fileName, i, dir);
             }
         }
         else if (argc > 2 && strcmp(argv[2], "deque") == 0)
@@ -51,14 +54,55 @@ int main(int argc, char* argv[]) {
             for (int i = 1000; i <= 10000000; i = i * 10)
             {
                 cout << "\nDeque\n";
-                Test(dgroup, dgroupGood, dgroupBad, fileName, i);
+                Test(dgroup, dgroupGood, dgroupBad, fileName, i, dir);
             }
         }
-        else 
+        else
         {
             exit(0);
         }
-            
+
+    }
+    else if (argc > 1 && strcmp(argv[1], "test2") == 0)
+    {
+        string test = "test";
+        string dir = "test/method_2";
+        int dir_ = _mkdir(test.c_str());
+        int dir__ = _mkdir(dir.c_str());
+        for (int i = 1000; i <= 10000000; i = i * 10)
+        {
+            generateStudents(i, fileName);
+        }
+
+        if (argc > 2 && strcmp(argv[2], "vector") == 0)
+        {
+            for (int i = 1000; i <= 10000000; i = i * 10)
+            {
+                cout << "\nVector\n";
+                Test2(group, groupGood, fileName, i, dir);
+            }
+        }
+        else if (argc > 2 && strcmp(argv[2], "list") == 0)
+        {
+            for (int i = 1000; i <= 10000000; i = i * 10)
+            {
+                cout << "\nList\n";
+                Test2(lgroup, lgroupGood, fileName, i, dir);
+            }
+        }
+        else if (argc > 2 && strcmp(argv[2], "deque") == 0)
+        {
+            for (int i = 1000; i <= 10000000; i = i * 10)
+            {
+                cout << "\nDeque\n";
+                Test2(dgroup, dgroupGood, fileName, i, dir);
+            }
+        }
+        else
+        {
+            exit(0);
+        }
+
     }
     else
     {
@@ -117,7 +161,7 @@ int main(int argc, char* argv[]) {
                     }
                     else if (std::toupper(ansfile) == 'G')
                     {
-                        
+
                         generateStudents();
                         bufferRead(group);
 
@@ -143,7 +187,7 @@ int main(int argc, char* argv[]) {
                         std::chrono::duration<double> diff3 = std::chrono::high_resolution_clock::now() - start3;
                         std::cout << "Writing took " << diff3.count() << " s" << endl;
                         run = false;
-                        
+
                     }
                     else
                     {

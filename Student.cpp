@@ -150,9 +150,9 @@ void print(vector<student>& group, int n, bool isMedian) {
     }
     cout << "-----------------------------------------------------------" << endl;
     for (int i = 0; i < n; i++)
-     {
+    {
         cout << std::setprecision(2) << std::fixed << group[i].firstName << string(20 - group[i].firstName.length(), ' ')
              << group[i].lastName << string(21 - group[i].lastName.length(), ' ') << group[i].finalGrade << endl;
     }
-    
+
 }

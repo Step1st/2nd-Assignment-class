@@ -4,6 +4,7 @@
 #include <iostream>
 #include <ios>
 #include <string>
+#include <cstring>
 #include <cctype>
 #include <algorithm>
 #include <iomanip>
@@ -28,6 +29,7 @@ using std::string;
 using std::vector;
 using std::list;
 using std::deque;
+using std::strcmp;
 
 struct student
 {
