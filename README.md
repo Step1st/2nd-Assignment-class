@@ -238,14 +238,19 @@ Writing took 0.013780 s
 | 10000000         |      24.494511 s   |     0.214100 s      | 7.127771 s       |   4.356007 s            |      4.822920 s       | 200.963783 MB     |
 
 ## Įdiegimas
-Visus atsiustus failus įdėkite į viena atskyra aplankalą ir *v0.4.sln* failą atidarykite su Visual Studio.  
-Atidarę šitam langelyje pasirinkite ```Release```   
-  
-![](https://raw.githubusercontent.com/Step1st/2nd-Assignment/assets/vsbuild1.png)
+Visus atsiustus failus įdėkite į viena atskyra aplankalą ir CMake.   
+CMake aplinkoje į ``` Where is the source code``` įrašykite kelią iki atsiustų failų, o į ``` Where to build the binaries``` įrašykite kelią kur norite gauti veikiančia programa.  
 
-Toliau langelyje ```Build``` paspauskite ```Build Solution```   
+![](https://raw.githubusercontent.com/Step1st/2nd-Assignment/assets/cmake-1.png)  
+
+Toliau paspauskite ``` Configure``` ir pasirinkite kokiai aplinkai generuosite projekta.   
+
+![](https://raw.githubusercontent.com/Step1st/2nd-Assignment/assets/cmake-2.png)  
+
+![](https://raw.githubusercontent.com/Step1st/2nd-Assignment/assets/cmake-3.png)  
   
-![](https://raw.githubusercontent.com/Step1st/2nd-Assignment/assets/vsbuild2.png)  
+Toliau spauskite ``` Generate``` ir jūsų nurodytam kelyje bus paruostas projektas arba makefile’as  jūsų nurodytai aplinkai.  
+
+![](https://raw.githubusercontent.com/Step1st/2nd-Assignment/assets/cmake-4.png)  
   
-Toliau jūsų aplankale turėtu atsirasti ```Release``` aplankalas kuriame ir bus pabaigtas programos failas
 
