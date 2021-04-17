@@ -4,7 +4,8 @@
 [v0.2](https://github.com/Step1st/2nd-Assignment/tree/v0.2)  
 [v0.3](https://github.com/Step1st/2nd-Assignment/tree/v0.3)  
 [v0.4](https://github.com/Step1st/2nd-Assignment/tree/v0.4)  
-[v0.5](https://github.com/Step1st/2nd-Assignment/tree/v0.5)
+[v0.5](https://github.com/Step1st/2nd-Assignment/tree/v0.5)  
+[v1.0](https://github.com/Step1st/2nd-Assignment/tree/v1.0)
 
 ##  Programos naudojimas ir veikimo principas
 ### Veikimo princimas
@@ -132,14 +133,14 @@ Vardenis            Pavardenis           9.40
 ```
 ## Testavimas
 #### Testavimo režimas
-Paleisti testavimo režimą galima per komandine eilutė į vedus flag’ą ```test``` ir konteinerį norimą patikrinti.
+Paleisti testavimo režimą galima per komandine eilutė į vedus flag’ą ```test1``` arba ```test2``` ***(priklausomai kurią strategiją norite patikrinti)*** ir konteinerį norimą patikrinti. 
 ```
-C:\Users\stolo\source\repos\v0.5\x64\Release>v0.5 test vector
+C:\Users\stolo\source\repos\v0.5\x64\Release>v0.5 test1 vector
 ```
 Paleidus testavimo režimą programoje bus sugeneruoti `1000, 10000, 1000000, 10000000` studentų failai ir išmatuotas jų apdorojimo laikas pasirinktam konteineriui. Jeigu studentų failai jau egzistuoja nauji nebus generuojami.
 
 ```
-C:\Users\stolo\source\repos\v0.5\x64\Release>v0.5 test vector
+C:\Users\stolo\source\repos\v0.5\x64\Release>v0.5 test1 vector
 Generating...
 Generating 1000 took 0.023594 s
 Generating...
@@ -171,35 +172,70 @@ Writing took 0.013780 s
 
 #### Testavimo rezultatai:
 
+#### 1 strategija:
+
 #### Vector:
 
-|Studentų skaičius |  Nuskaitymo laikas | Skaičiavimas laikas | Rūšiavimo laikas | Įrašimo į buferį laikas | Pilnas įrašimo laikas |
-| ---------------- |  ----------------- | ------------------- | ---------------- | ----------------------- | --------------------- | 
-| 1000             |  0.0353497 s       | 0.000225 s          | 0.0010648 s      | 0.0009733 s             | 0.022296 s            |
-| 10000            |    0.0721342 s     |    0.0010962 s      |   0.0052371 s    |    0.0083455 s          |    0.0250293 s        |
-| 100000           |     0.686503 s     |     0.0034008 s     |      0.0954395 s |  0.081143 s             |   0.106562 s          |
-| 1000000          |   6.90946 s        |    0.0220216 s      |    1.12152 s     |   0.799415 s            |    1.00997 s          |
-| 10000000         |       70.8632 s    |     0.272733 s      | 12.8804 s        |   7.99633 s             |       10.5594 s       |
+|Studentų skaičius |  Nuskaitymo laikas | Skaičiavimas laikas | Rūšiavimo laikas | Įrašimo į buferį laikas | Pilnas įrašimo laikas | konteinerio dydis |
+| ---------------- |  ----------------- | ------------------- | ---------------- | ----------------------- | --------------------- | ----------------- |
+| 1000             |  0.018525 s        | 0.000531 s          | 0.000665 s       |  0.000829 s             | 0.001698 s            | 0.045776 MB       |
+| 10000            |    0.048041 s      |    0.000685 s       |   0.007394 s     |    0.007873 s           |    0.011220 s         | 0.457764 MB       |
+| 100000           |     0.615828 s     |     0.002930 s      |      0.078734 s  |  0.082460 s             |   0.097304 s          | 4.577637 MB       |
+| 1000000          |   4.115486 s       |    0.018452 s       |   0.994884 s     |   0.802577 s            |    0.924011 s         | 45.776367 MB      |
+| 10000000         |     26.890814 s    |     0.086319 s      | 5.485796 s       |   4.382828 s            |      4.958608 s       | 241.156540 MB     |
 
 #### List:
 
-|Studentų skaičius | Nuskaitymo laikas | Skaičiavimas laikas | Rūšiavimo laikas | Įrašimo į buferį laikas | Pilnas įrašimo laikas |
-| ---------------- | ----------------- | ------------------- | ---------------- | ----------------------- | --------------------- |
-| 1000             | 0.0068402 s       | 0.0001927 s         | 0.0004039 s      | 0.0008633 s             | 0.0134239 s           |
-| 10000            |  0.0658105 s      |    0.0006487 s      |   0.0050253 s    |    0.0086414 s          |    0.0282394 s        |
-| 100000           |    0.651334 s     |     0.005143 s      |      0.0934613 s |  0.0933846 s            |   0.129447 s          |
-| 1000000          |    6.50563 s      |     0.0593183 s     |    1.48599 s     |   0.8731 s              |     1.21993 s         |
-| 10000000         |      65.8759 s    |     0.619371 s      |  20.5131 s       |   8.71794 s             |        12.2231        |
+|Studentų skaičius |  Nuskaitymo laikas | Skaičiavimas laikas | Rūšiavimo laikas | Įrašimo į buferį laikas | Pilnas įrašimo laikas | konteinerio dydis |
+| ---------------- |  ----------------- | ------------------- | ---------------- | ----------------------- | --------------------- | ----------------- |
+| 1000             |  0.019897 s        |0.000136 s           | 0.000342 s       | 0.000859 s              |0.001933 s             |  0.030518 MB      |
+| 10000            |   0.049986 s       |    0.000558 s       |   0.004659 s     |   0.007986 s            |   0.010934 s          | 0.305176 MB       |
+| 100000           |     0.609269 s     |    0.006022 s       |     0.067790 s   |  0.094484 s             |   0.107240 s          | 3.051758 MB       |
+| 1000000          |   4.303545 s       |    0.032977 s       |    0.974123 s    |   0.835239 s            |    0.968338 s         | 30.517578 MB      |
+| 10000000         |       26.807541 s  |     0.202444 s      | 6.424478 s       |   4.688235 s            |       5.230455 s      | 160.771027 MB     |
 
 #### Deque:
 
-|Studentų skaičius | Nuskaitymo laikas | Skaičiavimas laikas | Rūšiavimo laikas | Įrašimo į buferį laikas | Pilnas įrašimo laikas |
-| ---------------- | ----------------- | ------------------- | ---------------- | ----------------------- | --------------------- | 
-| 1000             | 0.0081628 s       | 0.0005872 s         | 0.0010862 s      | 0.0009901 s             | 0.0136431 s           |
-| 10000            |  0.0713746 s      |    0.0017012 s      |   0.0083788 s    |    0.0083946 s          |    0.0267434 s        |
-| 100000           |    0.706195 s     |     0.00405 s       |      0.124205 s  |  0.0856192 s            |   0.116703 s          |
-| 1000000          |    7.20883 s      |     0.0515288 s     |   1.49856 s      |   0.855429 s            |     1.09735 s         |
-| 10000000         |     74.4758 s     |     0.534967 s      | 18.6328 s        |   8.46752 s             |     12.5377 s         |
+|Studentų skaičius |  Nuskaitymo laikas | Skaičiavimas laikas | Rūšiavimo laikas | Įrašimo į buferį laikas | Pilnas įrašimo laikas | konteinerio dydis |
+| ---------------- |  ----------------- | ------------------- | ---------------- | ----------------------- | --------------------- | ----------------- |
+| 1000             |  0.019134 s        | 0.000207 s          | 0.000647 s       |  0.000862 s             | 0.002151 s            | 0.076294 MB       |
+| 10000            |    0.044909 s      |    0.000397 s       |  0.008070 s      |    0.008108 s           |   0.011065 s          | 0.762939 MB       |
+| 100000           |     0.609020 s     |     0.004744 s      |      0.100477 s  |  0.083608 s             |   0.096319 s          | 7.629395 MB       |
+| 1000000          |   4.110294 s       |    0.030471 s       |    1.359355 s    |   0.865812 s            |    0.992446 s         | 76.293945 MB      |
+| 10000000         |       27.120232 s  |    0.201896 s       | 7.768315 s       |   4.511575 s            |      5.011196 s       | 401.927567 MB     |
+
+
+#### 2 strategija:
+
+#### Vector:
+
+|Studentų skaičius |  Nuskaitymo laikas | Skaičiavimas laikas | Rūšiavimo laikas | Įrašimo į buferį laikas | Pilnas įrašimo laikas | konteinerio dydis |
+| ---------------- |  ----------------- | ------------------- | ---------------- | ----------------------- | --------------------- | ----------------- |
+| 1000             |  0.007720 s        | 0.000188 s          | 0.000597 s       | 0.000834 s              | 0.001869 s            |    0.022888 MB    |
+| 10000            |    0.039074 s      |    0.000365 s       |   0.005998 s     |    0.007923 s           |    0.010746 s         |    0.228882 MB    |
+| 100000           |     0.548156 s     |     0.003233 s      |     0.065653 s   |  0.078402 s             |    0.091283 s         |    2.288818 MB    |
+| 1000000          |   3.792698 s       |    0.016268 s       |    0.875766 s    |  0.754080 s             |    0.852496 s         |   22.888184 MB    |
+| 10000000         |      24.485012 s   |     0.079543        | 4.940063 s       |   4.115565 s            |       4.653740 s      |  120.578270 MB    |
+
+#### List:
+
+|Studentų skaičius |  Nuskaitymo laikas | Skaičiavimas laikas | Rūšiavimo laikas | Įrašimo į buferį laikas | Pilnas įrašimo laikas | konteinerio dydis |
+| ---------------- |  ----------------- | ------------------- | ---------------- | ----------------------- | --------------------- | ----------------- |
+| 1000             |  0.007212 s        | 0.000217 s          | 0.000285 s       |  0.000996 s             |  0.004266 s           | 0.015259 MB       |
+| 10000            |    0.039058 s      |    0.000630 s       |   0.003773 s     |    0.008353 s           |    0.011525 s         | 0.152588 MB       |
+| 100000           |     0.567019 s     |     0.005614 s      |      0.065533 s  |  0.088193 s             |   0.101014 s          |  1.525879 MB      |
+| 1000000          |   3.745888 s       | 0.035473 s          |    1.029524 s    |   0.832052 s            |     0.934534 s        |15.258789 MB       |
+| 10000000         |       24.862976 s  |     0.220341 s      | 7.123599 s       |   4.502971 s            |      5.000355 s       | 80.385513 MB      |
+
+#### Deque:
+
+|Studentų skaičius |  Nuskaitymo laikas | Skaičiavimas laikas | Rūšiavimo laikas | Įrašimo į buferį laikas | Pilnas įrašimo laikas | konteinerio dydis |
+| ---------------- |  ----------------- | ------------------- | ---------------- | ----------------------- | --------------------- | ----------------- |
+| 1000             |  0.007146 s        | 0.000179 s          | 0.000624 s       | 0.000860 s              |0.002058 s             | 0.038147 MB       |
+| 10000            |     0.038378 s     |     0.000398 s      |  0.006895 s      |    0.008412 s           |    0.011029 s         | 0.381470 MB       |
+| 100000           |    0.577493 s      |      0.005186 s     |      0.094161 s  |  0.081560 s             |   0.095201 s          | 3.814697 MB       |
+| 1000000          |   3.726173 s       |    0.030681 s       |   1.230832 s     |   0.792141 s            |    0.885720 s         | 38.146973 MB      |
+| 10000000         |      24.494511 s   |     0.214100 s      | 7.127771 s       |   4.356007 s            |      4.822920 s       | 200.963783 MB     |
 
 ## Įdiegimas
 Visus atsiustus failus įdėkite į viena atskyra aplankalą ir *v0.4.sln* failą atidarykite su Visual Studio.  
