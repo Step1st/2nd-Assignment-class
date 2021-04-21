@@ -152,8 +152,6 @@ void Test(T& group, T& groupGood, T& groupBad, string fileName, int n, string di
     writeToFile(groupGood, groupBad, n, dir);
     diff = std::chrono::high_resolution_clock::now() - start;
     std::cout << "Writing took " << std::fixed << diff.count() << " s" << endl;
-    cout << "Containers took up " << (((double)(group.size()) + (double)(groupBad.size()) + (double)(groupGood.size())) * sizeof(T) ) / 1024 / 1024 << " MB" << endl;
-
     group.clear();
     groupGood.clear();
     groupBad.clear();
@@ -181,8 +179,6 @@ void Test2(T& group, T& groupGood, string fileName, int n, string dir) {
     writeToFile(groupGood, group, n, dir);
     diff = std::chrono::high_resolution_clock::now() - start;
     std::cout << "Writing took " << std::fixed << diff.count() << " s" << endl;
-    cout << "Containers took up " << (((double)(group.size()) + (double)(groupGood.size())) * sizeof(T)) / 1024 / 1024 << " MB" << endl;
-
     group.clear();
     groupGood.clear();
 }
