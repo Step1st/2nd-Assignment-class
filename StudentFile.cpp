@@ -1,20 +1,19 @@
 #include "StudentFile.h"
 
-bool compareByLastName(const student& a, const student& b) {
-    return a.lastName < b.lastName;
+bool compareByLastName(const Student& a, const Student& b) {
+    return a.getLastName() < b.getLastName();
 }
 
-bool compareByFinalGrade(const student& a, const student& b) {
-    return a.finalGrade < b.finalGrade;
+bool compareByFinalGrade(const Student& a, const Student& b) {
+    return a.getFinalGrade() < b.getFinalGrade();
 }
 
-bool isGood(const student& a) {
-    return a.finalGrade >= 5;
+bool isGood(const Student& a) {
+    return a.getFinalGrade() >= 5;
 }
 
-void bufferRead(vector<student>& group) {
-    string eil;
-    student temp;
+void bufferRead(vector<Student>& group) {
+    string eil, name;
     std::stringstream startBuffer;
     std::stringstream lines;
     std::fstream input;
@@ -45,21 +44,20 @@ void bufferRead(vector<student>& group) {
         if (!startBuffer.eof()) {
             std::getline(startBuffer, eil);
             lines << eil;
-
-            lines >> temp.firstName >> temp.lastName;
-
+            Student temp;
+            lines >> name;
+            temp.setFirstName(name);
+            lines>> name;
+            temp.setLastName(name);
             while (!lines.eof())
             {
                 lines >> k;
-                temp.homeworkGrades.push_back(k);
+                temp.addGrade(k);
             }
             lines.clear();
-            temp.examGrade = temp.homeworkGrades.back();
-            temp.homeworkGrades.pop_back();
-            temp.homeworkGrades.shrink_to_fit();
-            temp.homeworkSize = temp.homeworkGrades.size();
+            temp.setExamGrade(temp.getHomeworkGrade(temp.getHomeworkSize()-1));
+            temp.removeLastGrade();
             group.push_back(temp);
-            temp = {};
         }
         else break;
     }
@@ -70,7 +68,7 @@ void bufferRead(vector<student>& group) {
     std::cout << "Reading took " << diff.count() << " s" << endl;
 }
 
-void writeToFile(vector<student>& group, int n, bool isMedian) {
+void writeToFile(vector<Student>& group, bool isMedian) {
     std::ofstream output("output.txt");
     std::stringstream endBuffer;
 
@@ -85,10 +83,10 @@ void writeToFile(vector<student>& group, int n, bool isMedian) {
 
     endBuffer << "-----------------------------------------------------------\n";
     auto start = std::chrono::high_resolution_clock::now();
-    for (int i = 0; i < n; i++)
+    for (Student& i : group)
     {
-        endBuffer << std::setprecision(2) << std::fixed << group.at(i).firstName << string(20 - group.at(i).firstName.length(), ' ')
-                  << group.at(i).lastName << string(21 - group.at(i).lastName.length(), ' ') << group.at(i).finalGrade << endl;
+        endBuffer << std::setprecision(2) << std::fixed << i.getFirstName() << string(20 - i.getFirstName().length(), ' ')
+                  << i.getLastName() << string(21 - i.getLastName().length(), ' ') << i.getFinalGrade() << endl;
     }
     std::chrono::duration<double> diff = std::chrono::high_resolution_clock::now() - start;
     std::cout << "writing to buffer took " << diff.count() << " s" << endl;
@@ -98,7 +96,7 @@ void writeToFile(vector<student>& group, int n, bool isMedian) {
 }
 
 
-void writeToFile(vector<student>& groupGood, vector<student>& groupBad, bool isMedian) {
+void writeToFile(vector<Student>& groupGood, vector<Student>& groupBad, bool isMedian) {
     std::ofstream output1("kietiakiai.txt");
     std::ofstream output2("vargšiukai.txt");
     std::stringstream endBuffer1;
@@ -119,16 +117,16 @@ void writeToFile(vector<student>& groupGood, vector<student>& groupBad, bool isM
     endBuffer2 << "-----------------------------------------------------------\n";
 
     auto start = std::chrono::high_resolution_clock::now();
-    for (student& i : groupGood)
+    for (Student& i : groupGood)
     {
-        endBuffer1 << std::setprecision(2) << std::fixed << i.firstName << string(20 - i.firstName.length(), ' ')
-                   << i.lastName << string(21 - i.lastName.length(), ' ') << i.finalGrade << endl;
+        endBuffer1 << std::setprecision(2) << std::fixed << i.getFirstName() << string(20 - i.getFirstName().length(), ' ')
+                  << i.getLastName() << string(21 - i.getLastName().length(), ' ') << i.getFinalGrade() << endl;
     }
 
-    for (student& i : groupBad)
+    for (Student& i : groupBad)
     {
-        endBuffer2 << std::setprecision(2) << std::fixed << i.firstName << string(20 - i.firstName.length(), ' ')
-                   << i.lastName << string(21 - i.lastName.length(), ' ') << i.finalGrade << endl;
+        endBuffer2 << std::setprecision(2) << std::fixed << i.getFirstName() << string(20 - i.getFirstName().length(), ' ')
+                  << i.getLastName() << string(21 - i.getLastName().length(), ' ') << i.getFinalGrade() << endl;
     }
     std::chrono::duration<double> diff = std::chrono::high_resolution_clock::now() - start;
     std::cout << "writing to buffer took " << diff.count() << " s" << endl;
@@ -143,7 +141,7 @@ void writeToFile(vector<student>& groupGood, vector<student>& groupBad, bool isM
 void generateStudents() {
     std::ofstream output("kursiokai.txt");
     std::stringstream endBuffer;
-    student Student;
+    Student Student;
     int n;
     bool run = true;
 
@@ -192,7 +190,7 @@ void generateStudents() {
     std::cout << "Generating took " << diff.count() << " s" << endl;
 }
 
-void sortStudents(list<student>& group, list<student>& groupGood, list<student>& groupBad) {
+void sortStudents(list<Student>& group, list<Student>& groupGood, list<Student>& groupBad) {
 
     group.sort(compareByFinalGrade);
     auto it = std::find_if(group.begin(), group.end(), isGood);
@@ -204,7 +202,7 @@ void sortStudents(list<student>& group, list<student>& groupGood, list<student>&
     groupBad.sort(compareByLastName);
 }
 
-void sortStudents2(list<student>& groupBad, list<student>& groupGood) {
+void sortStudents2(list<Student>& groupBad, list<Student>& groupGood) {
 
     groupBad.sort(compareByFinalGrade);
     auto it = std::find_if(groupBad.begin(), groupBad.end(), isGood);

@@ -4,19 +4,19 @@
 #include "Student.h"
 #include "General.h"
 
-void bufferRead(vector<student>&);
+void bufferRead(vector<Student>&);
 
-void writeToFile(vector<student>&, int, bool);
-void writeToFile(vector<student>&, vector<student>&, bool);
+void writeToFile(vector<Student>&, bool);
+void writeToFile(vector<Student>&, vector<Student>&, bool);
 
 void generateStudents();
 
-bool compareByLastName(const student&, const student&);
-bool compareByFinalGrade(const student&, const student&);
-bool isGood(const student&);
+bool compareByLastName(const Student&, const Student&);
+bool compareByFinalGrade(const Student&, const Student&);
+bool isGood(const Student&);
 
-void sortStudents(list<student>&, list<student>&, list<student>&);
-void sortStudents2(list<student>&, list<student>&);
+void sortStudents(list<Student>&, list<Student>&, list<Student>&);
+void sortStudents2(list<Student>&, list<Student>&);
 
 template <class T>
 void sortStudents(T& group, T& groupGood, T& groupBad) {

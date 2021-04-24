@@ -1,6 +1,11 @@
-#ifndef STUDENT_H_INCLUDED
-#define STUDENT_H_INCLUDED
+//
+// Created by stolo on 2021-04-21.
+//
 
+#ifndef V1_1_STUDENT_H
+#define V1_1_STUDENT_H
+
+#include "General.h"
 #include <iostream>
 #include <ios>
 #include <string>
@@ -21,7 +26,6 @@
 #include <deque>
 #include <direct.h>
 
-
 using std::cout;
 using std::cin;
 using std::endl;
@@ -31,49 +35,41 @@ using std::list;
 using std::deque;
 using std::strcmp;
 
-struct student
-{
+class Student {
+private:
     string firstName, lastName;
     vector<int> homeworkGrades;
-    int homeworkSize, examGrade;
+    int homeworkSize = 0, examGrade;
     double finalGrade;
+public:
+    Student();
+    //Student( string firstName, string lastName);
+    ~Student();
+
+    void setFirstName(string name);
+    void setLastName(string name);
+    void addGrade(int Grade);
+    void setExamGrade(int Exam);
+    void setFinalGrade(double Grade);
+
+    string getFirstName() const;
+    string getLastName() const;
+    int getHomeworkSize() const;
+    int getHomeworkGrade(int index) const;
+    int getExamGrade() const;
+    double getFinalGrade() const;
+
+    void removeLastGrade();
+
+    void finalGradeAverage();
+    void finalGradeMedian();
 };
 
-void homeworkGrades(bool, student&);
-bool isdigits(string&);
-bool validateName(string);
-string getDigits();
+void homeworkGrades(bool, Student&, int);
 int getExam();
-void generateGrades(bool, student&);
+void generateGrades(bool, Student&, int);
 
-void print(vector<student>&, int, bool);
+void print(vector<Student>&, bool);
 
-template <class T>
-void finalGradeAverage(T& group, int n) {
-    double average;
-    for (student& i : group)
-    {
-        average = 0;
-        for (int j = 0; j < i.homeworkSize; j++)
-        {
-            average = average + i.homeworkGrades[j];
-        }
-        average = average / i.homeworkSize;
-        i.finalGrade = (average * 0.4) + (i.examGrade * 0.6);
-    }
-}
-template <class T>
-void finalGradeMedian(T& group, int n) {
-    double median;
-    for (student& i : group)
-    {
-        std::sort(i.homeworkGrades.begin(), i.homeworkGrades.end());
-        median = i.homeworkGrades[(i.homeworkSize / 2)];
-        if (i.homeworkSize % 2 == 0)
-        {
-            median = (median + i.homeworkGrades[(i.homeworkSize / 2) - 1]) / 2;
-        }
-        i.finalGrade = (median * 0.4) + (i.examGrade * 0.6);
-    }
-}
-#endif // STUDENT_H_INCLUDED
+
+#endif //V1_1_STUDENT_H
