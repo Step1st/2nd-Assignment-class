@@ -1,21 +1,21 @@
 
 #include "Student.h"
 #include "StudentFile.h"
-#include "General.h"
 #include "Test.h"
 
 int main(int argc, char* argv[]) {
-    vector<student> group;  // student vector
-    vector<student> groupGood;
-    vector<student> groupBad;
-    list<student> lgroup;
-    list<student> lgroupGood;
-    list<student> lgroupBad;
-    deque<student> dgroup;
-    deque<student> dgroupGood;
-    deque<student> dgroupBad;
+    vector<Student> group;  // student vector
+    vector<Student> groupGood;
+    vector<Student> groupBad;
+    list<Student> lgroup;
+    list<Student> lgroupGood;
+    list<Student> lgroupBad;
+    deque<Student> dgroup;
+    deque<Student> dgroupGood;
+    deque<Student> dgroupBad;
     string fileName = "test/kursiokai";
     int n;                  // number of students
+    int homeworkSize = NULL;
     bool run = true;        // used for while loops in main
     bool gradeNumber;       // flag for if grade number is known
     char readfile;
@@ -124,12 +124,15 @@ int main(int argc, char* argv[]) {
                                 bufferRead(group);
                                 auto start2 = std::chrono::high_resolution_clock::now();
                                 cout << "Calculating..." << endl;
-                                finalGradeMedian(group, group.size());
+                                for(Student& i : group)
+                                {
+                                    i.finalGradeMedian();
+                                }
                                 std::chrono::duration<double> diff2 = std::chrono::high_resolution_clock::now() - start2;
                                 std::cout << "Calculating took " << diff2.count() << " s" << endl;
                                 auto start3 = std::chrono::high_resolution_clock::now();
                                 cout << "Writing..." << endl;
-                                writeToFile(group, group.size(), true);
+                                writeToFile(group, true);
                                 run = false;
                                 std::chrono::duration<double> diff3 = std::chrono::high_resolution_clock::now() - start3;
                                 std::cout << "Writing took " << diff3.count() << " s" << endl;
@@ -139,12 +142,15 @@ int main(int argc, char* argv[]) {
                                 bufferRead(group);
                                 auto start2 = std::chrono::high_resolution_clock::now();
                                 cout << "Calculating..." << endl;
-                                finalGradeAverage(group, group.size());
+                                for(Student& i : group)
+                                {
+                                    i.finalGradeAverage();
+                                }
                                 std::chrono::duration<double> diff2 = std::chrono::high_resolution_clock::now() - start2;
                                 std::cout << "Calculating took " << diff2.count() << " s" << endl;
                                 auto start3 = std::chrono::high_resolution_clock::now();
                                 cout << "Writing..." << endl;
-                                writeToFile(group, group.size(), false);
+                                writeToFile(group, false);
                                 run = false;
                                 std::chrono::duration<double> diff3 = std::chrono::high_resolution_clock::now() - start3;
                                 std::cout << "Writing took " << diff3.count() << " s" << endl;
@@ -168,7 +174,10 @@ int main(int argc, char* argv[]) {
                         auto start2 = std::chrono::high_resolution_clock::now();
                         cout << "Calculating..." << endl;
 
-                        finalGradeMedian(group, group.size());
+                        for(Student& i : group)
+                        {
+                            i.finalGradeMedian();
+                        }
 
                         std::chrono::duration<double> diff2 = std::chrono::high_resolution_clock::now() - start2;
                         std::cout << "Calculating took " << diff2.count() << " s" << endl;
@@ -219,19 +228,21 @@ int main(int argc, char* argv[]) {
 
                 for (int i = 0; i < n; i++)
                 {
-                    group.push_back(student());
-
+                    Student temp;
+                    string name;
                     cout << "Enter students first name: ";
                     do {
-                        cin >> group[i].firstName;
+                        cin >> name;
+                        temp.setFirstName(name);
                         cout << endl;
-                    } while (!validateName(group[i].firstName));
+                    } while (!validateName(name));
 
                     cout << "Enter students last name: ";
                     do {
-                        cin >> group[i].lastName;
+                        cin >> name;
+                        temp.setLastName(name);
                         cout << endl;
-                    } while (!validateName(group[i].lastName));
+                    } while (!validateName(name));
 
                     char ansGrade;
                     cout << "Is the number of grades known?(y/n): ";
@@ -239,13 +250,12 @@ int main(int argc, char* argv[]) {
                         cin >> ansGrade;
                         if (std::toupper(ansGrade) == 'Y')
                         {
-                            int temp;
                             cout << "Enter the number of grades: ";
                             do {
                                 do {
                                     try
                                     {
-                                        temp = std::stoi(getDigits());
+                                        homeworkSize = std::stoi(getDigits());
                                         run = false;
                                     }
                                     catch (std::exception& e)
@@ -256,9 +266,8 @@ int main(int argc, char* argv[]) {
                                     }
                                 } while (run);
 
-                                if (temp > 0)
+                                if (homeworkSize > 0)
                                 {
-                                    group[i].homeworkSize = temp;
                                     run = false;
                                 }
                                 else
@@ -292,14 +301,14 @@ int main(int argc, char* argv[]) {
                         if (std::toupper(ansRandom) == 'Y')
                         {
                             cout << endl;
-                            generateGrades(gradeNumber, group[i]);
+                            generateGrades(gradeNumber, temp, homeworkSize);
                             run = false;
                         }
                         else if (std::toupper(ansRandom) == 'N')
                         {
-                            homeworkGrades(gradeNumber, group[i]);
+                            homeworkGrades(gradeNumber, temp, homeworkSize);
                             cout << endl << "Enter students exam grade: ";
-                            group[i].examGrade = getExam();
+                            temp.setExamGrade(getExam());
                             run = false;
                         }
                         else
@@ -310,6 +319,7 @@ int main(int argc, char* argv[]) {
                             run = true;
                         }
                     } while (run);
+                    group.push_back(temp);
                 }
                 group.shrink_to_fit();
 
@@ -318,14 +328,20 @@ int main(int argc, char* argv[]) {
                     cin >> ansMedian;
                     if (std::toupper(ansMedian) == 'Y')
                     {
-                        finalGradeMedian(group, n);
-                        print(group, n, true);
+                        for(Student& i : group)
+                        {
+                            i.finalGradeMedian();
+                        }
+                        print(group, true);
                         run = false;
                     }
                     else if (std::toupper(ansMedian) == 'N')
                     {
-                        finalGradeAverage(group, n);
-                        print(group, n, false);
+                        for(Student& i : group)
+                        {
+                            i.finalGradeAverage();
+                        }
+                        print(group, false);
                         run = false;
                     }
                     else

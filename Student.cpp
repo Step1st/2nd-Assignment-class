@@ -1,23 +1,92 @@
-#include "Student.h"
-#include "General.h"
+//
+// Created by stolo on 2021-04-21.
+//
 
-void homeworkGrades(bool gradeNumber, student& Student) {
+#include "Student.h"
+// Student class functions:
+
+Student::Student() {}
+
+Student::~Student() {
+    homeworkGrades.clear();
+    homeworkGrades.shrink_to_fit();
+}
+
+void Student::setFirstName(string Name) { firstName = Name; }
+
+void Student::setLastName(string Name) { lastName = Name; }
+
+void Student::addGrade(int Grade) {
+    homeworkGrades.push_back(Grade);
+    homeworkSize = homeworkSize + 1;
+    homeworkGrades.shrink_to_fit();
+}
+
+void Student::setExamGrade(int Exam) { examGrade = Exam; }
+
+void Student::setFinalGrade(double Grade) { finalGrade = Grade; }
+
+string Student::getFirstName() const { return firstName; }
+
+string Student::getLastName() const { return lastName; }
+
+int Student::getHomeworkSize() const { return homeworkSize; }
+
+int Student::getHomeworkGrade(int index) const { return homeworkGrades.at(index); }
+
+int Student::getExamGrade() const { return examGrade; }
+
+double Student::getFinalGrade() const { return finalGrade;}
+
+void Student::removeLastGrade() {
+    homeworkGrades.pop_back();
+    homeworkSize = homeworkSize - 1;
+    homeworkGrades.shrink_to_fit();
+}
+
+
+void Student::finalGradeAverage() {
+    double average;
+    average = 0;
+    for (int j = 0; j < getHomeworkSize(); j++)
+    {
+        average = average + getHomeworkGrade(j);
+    }
+    average = average / getHomeworkSize();
+    setFinalGrade((average * 0.4) + (getExamGrade() * 0.6));
+}
+
+void Student::finalGradeMedian() {
+    double median;
+    std::sort(homeworkGrades.begin(), homeworkGrades.end());
+    median = getHomeworkGrade(getHomeworkSize() / 2);
+    if (getHomeworkSize() % 2 == 0)
+    {
+        median = (median + getHomeworkGrade((getHomeworkSize() / 2) - 1)) / 2;
+    }
+    setFinalGrade((median * 0.4) + (getExamGrade() * 0.6));
+}
+
+
+// Program functions:
+
+void homeworkGrades(bool gradeNumber, Student& Student, int homeworkSize) {
     bool run = true;
     string Grade;
     int temp;
     if (gradeNumber)
     {
-        for (int i = 0; i < Student.homeworkSize; i++)
+        for (int i = 0; i < homeworkSize; i++)
         {
             do {
-                cout << Student.homeworkGrades.size() + 1 << ". Enter grade: ";
+                cout << Student.getHomeworkSize() + 1 << ". Enter grade: ";
                 cin >> Grade;
                 try
                 {
                     temp = std::stoi(Grade);
                     if (temp <= 10 && temp >= 0)
                     {
-                        Student.homeworkGrades.push_back(temp);
+                        Student.addGrade(temp);
                         run = false;
                     }
                     else
@@ -38,13 +107,11 @@ void homeworkGrades(bool gradeNumber, student& Student) {
     {
         cout << endl << "To finish entering grades type in 'end'" << endl;
         do {
-            cout << Student.homeworkGrades.size() + 1 << ". Enter grade: ";
+            cout << Student.getHomeworkSize() + 1 << ". Enter grade: ";
             cin >> Grade;
 
             if (Grade == "end" || Grade == "END")
             {
-                Student.homeworkSize = Student.homeworkGrades.size();
-                Student.homeworkGrades.shrink_to_fit();
                 run = false;
             }
             else
@@ -55,7 +122,7 @@ void homeworkGrades(bool gradeNumber, student& Student) {
 
                     if (temp <= 10 && temp >= 0)
                     {
-                        Student.homeworkGrades.push_back(temp);
+                        Student.addGrade(temp);
                     }
                     else
                     {
@@ -68,7 +135,7 @@ void homeworkGrades(bool gradeNumber, student& Student) {
                 }
             }
 
-            if (Student.homeworkGrades.empty() && (Grade == "end" || Grade == "END"))
+            if (Student.getHomeworkSize() == 0 && (Grade == "end" || Grade == "END"))
             {
                 cout << "Error! Please enter at least one grade" << endl;
                 run = true;
@@ -110,7 +177,7 @@ int getExam() {
 
 //Generates random homework grades and exam grade
 
-void generateGrades(bool gradeNumber, student& Student) {
+void generateGrades(bool gradeNumber, Student& Student, int homeworkSize) {
     using chronoClock = std::chrono::high_resolution_clock;
     unsigned seed = static_cast<long unsigned int> (chronoClock::now().time_since_epoch().count());
     std::mt19937 generator(seed);
@@ -119,17 +186,17 @@ void generateGrades(bool gradeNumber, student& Student) {
     if (!gradeNumber)
     {
         std::uniform_int_distribution<int> distributionSize(1, 15);
-        Student.homeworkSize = distributionSize(generator);
+        homeworkSize = distributionSize(generator);
     }
 
-    cout << "Generated " << Student.homeworkSize << " homework grades: ";
-    for (int i = 0; i < Student.homeworkSize; i++)
+    cout << "Generated " << homeworkSize << " homework grades: ";
+    for (int i = 0; i < homeworkSize; i++)
     {
-        Student.homeworkGrades.push_back(distribution(generator));
-        cout << Student.homeworkGrades[i] << " ";
+        Student.addGrade(distribution(generator));
+        cout << Student.getHomeworkGrade(i) << " ";
     }
-    Student.examGrade = distribution(generator);
-    cout << endl << "Generated exam grade: " << Student.examGrade << endl << endl;
+    Student.setExamGrade(distribution(generator));
+    cout << endl << "Generated exam grade: " << Student.getExamGrade() << endl << endl;
 
 }
 
@@ -138,21 +205,16 @@ void generateGrades(bool gradeNumber, student& Student) {
 
 //Prints results
 
-void print(vector<student>& group, int n, bool isMedian) {
+void print(vector<Student>& group, bool isMedian) {
     cout << endl;
-    if (isMedian)
-    {
+    if (isMedian) {
         cout << "First name          Last name           Final grade(median)" << endl;
-    }
-    else
-    {
+    } else {
         cout << "First name          Last name           Final grade(average)" << endl;
     }
     cout << "-----------------------------------------------------------" << endl;
-    for (int i = 0; i < n; i++)
-    {
-        cout << std::setprecision(2) << std::fixed << group[i].firstName << string(20 - group[i].firstName.length(), ' ')
-             << group[i].lastName << string(21 - group[i].lastName.length(), ' ') << group[i].finalGrade << endl;
+    for (Student &i : group) {
+        cout << std::setprecision(2) << std::fixed << i.getFirstName() << string(20 - i.getFirstName().length(), ' ')
+             << i.getLastName() << string(21 - i.getLastName().length(), ' ') << i.getFinalGrade() << endl;
     }
-
 }

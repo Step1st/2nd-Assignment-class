@@ -9,8 +9,7 @@ void generateStudents(int, string);
 
 template<class T>
 void bufferRead(T& group, string fileName, int n) {
-    string eil;
-    student temp;
+    string eil, name;
     std::stringstream startBuffer;
     std::stringstream lines;
     std::fstream input;
@@ -42,21 +41,20 @@ void bufferRead(T& group, string fileName, int n) {
             if (!startBuffer.eof()) {
                 std::getline(startBuffer, eil);
                 lines << eil;
-                lines >> temp.firstName >> temp.lastName;
-                while (!lines.eof()) {
+                Student temp;
+                lines >> name;
+                temp.setFirstName(name);
+                lines>> name;
+                temp.setLastName(name);
+                while (!lines.eof())
+                {
                     lines >> k;
-                    temp.homeworkGrades.push_back(k);
+                    temp.addGrade(k);
                 }
-
                 lines.clear();
-                temp.examGrade = temp.homeworkGrades.back();
-                temp.homeworkGrades.pop_back();
-                temp.homeworkGrades.shrink_to_fit();
-                temp.homeworkSize = temp.homeworkGrades.size();
+                temp.setExamGrade(temp.getHomeworkGrade(temp.getHomeworkSize()-1));
+                temp.removeLastGrade();
                 group.push_back(temp);
-                temp.homeworkGrades.erase(temp.homeworkGrades.begin(), temp.homeworkGrades.end());
-                temp = {};
-                t++;
             }
             else break;
         }
@@ -75,19 +73,19 @@ template <class T>
 void writeToFile(T& groupGood, T& groupBad, int n, string dir) {
     string op1;
     string op2;
-    if (std::is_same<T, vector<student>>::value)
+    if (std::is_same<T, vector<Student>>::value)
     {
         dir.append("/vector");
         op1 = dir + "/kietiakiai.txt";
         op2 = dir + "/vargsiukai.txt";
     }
-    if (std::is_same<T, list<student>>::value)
+    if (std::is_same<T, list<Student>>::value)
     {
         dir.append("/list");
         op1 = dir + "/kietiakiai.txt";
         op2 = dir + "/vargsiukai.txt";
     }
-    if (std::is_same<T, deque<student>>::value)
+    if (std::is_same<T, deque<Student>>::value)
     {
         dir.append("/deque");
         op1 = dir + "/kietiakiai.txt";
@@ -108,16 +106,16 @@ void writeToFile(T& groupGood, T& groupBad, int n, string dir) {
     endBuffer2 << "-----------------------------------------------------------\n";
 
     auto start = std::chrono::high_resolution_clock::now();
-    for (student& i : groupGood)
+    for (Student& i : groupGood)
     {
-        endBuffer1 << std::setprecision(2) << std::fixed << i.firstName << string(20 - i.firstName.length(), ' ')
-                   << i.lastName << string(21 - i.lastName.length(), ' ') << i.finalGrade << endl;
+        endBuffer1 << std::setprecision(2) << std::fixed << i.getFirstName() << string(20 - i.getFirstName().length(), ' ')
+                   << i.getLastName() << string(21 - i.getLastName().length(), ' ') << i.getFinalGrade() << endl;
     }
 
-    for (student& i : groupBad)
+    for (Student& i : groupBad)
     {
-        endBuffer2 << std::setprecision(2) << std::fixed << i.firstName << string(20 - i.firstName.length(), ' ')
-                   << i.lastName << string(21 - i.lastName.length(), ' ') << i.finalGrade << endl;
+        endBuffer2 << std::setprecision(2) << std::fixed << i.getFirstName() << string(20 - i.getFirstName().length(), ' ')
+                   << i.getLastName() << string(21 - i.getLastName().length(), ' ') << i.getFinalGrade() << endl;
     }
     std::chrono::duration<double> diff = std::chrono::high_resolution_clock::now() - start;
     std::cout << "writing to buffer took " << diff.count() << " s" << endl;
@@ -139,7 +137,10 @@ void Test(T& group, T& groupGood, T& groupBad, string fileName, int n, string di
     std::cout << "Reading took " << std::fixed << diff.count() << " s" << endl;
     start = std::chrono::high_resolution_clock::now();
     cout << "Calculating..." << endl;
-    finalGradeAverage(group, group.size());
+    for(Student& i : group)
+    {
+        i.finalGradeAverage();
+    }
     diff = std::chrono::high_resolution_clock::now() - start;
     std::cout << "Calculating took " << std::fixed << diff.count() << " s" << endl;
     start = std::chrono::high_resolution_clock::now();
@@ -166,7 +167,10 @@ void Test2(T& group, T& groupGood, string fileName, int n, string dir) {
     std::cout << "Reading took " << std::fixed << diff.count() << " s" << endl;
     start = std::chrono::high_resolution_clock::now();
     cout << "Calculating..." << endl;
-    finalGradeAverage(group, group.size());
+    for(Student& i : group)
+    {
+        i.finalGradeAverage();
+    }
     diff = std::chrono::high_resolution_clock::now() - start;
     std::cout << "Calculating took " << std::fixed << diff.count() << " s" << endl;
     start = std::chrono::high_resolution_clock::now();

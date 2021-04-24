@@ -1,3 +1,4 @@
+
 #include "General.h"
 
 //checks is string is only made out of digits

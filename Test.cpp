@@ -9,8 +9,6 @@ void generateStudents(int n, string fileName) {
     {
         std::ofstream output(fileName);
         std::stringstream endBuffer;
-        student Student;
-        bool run = true;
         using chronoClock = std::chrono::high_resolution_clock;
         unsigned seed = static_cast<long unsigned int> (chronoClock::now().time_since_epoch().count());
         std::mt19937 generator(seed);
@@ -20,7 +18,7 @@ void generateStudents(int n, string fileName) {
         cout << "Generating..." << endl;
         auto start = std::chrono::high_resolution_clock::now();
 
-        int a = distributionSize(generator);
+        int a = 7;//distributionSize(generator);
 
         for (int i = 1; i <= n; i++)
         {
