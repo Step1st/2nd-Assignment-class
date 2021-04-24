@@ -1,8 +1,3 @@
-//
-// Created by stolo on 2021-04-21.
-//
-
-#include "General.h"
 
 #include "General.h"
 
