@@ -179,14 +179,14 @@ Writing took 0.013780 s
 
 #### Struct:
 
-|Opimizavimo lygis |  Nuskaitymo laikas | Skaičiavimas laikas | Rūšiavimo laikas | Įrašimo į buferį laikas | Pilnas įrašimo laikas |
+|Optimizavimo lygis|  Nuskaitymo laikas | Skaičiavimas laikas | Rūšiavimo laikas | Įrašimo į buferį laikas | Pilnas įrašimo laikas |
 | ---------------- |  ----------------- | ------------------- | ---------------- | ----------------------- | --------------------- |
 | /O1              |   42.269222 s      |    0.161010 s       |   10.963281 s    |   8.177022 s            |    9.126611 s         |
 | /O2              |     42.336427 s    |    0.141348 s      | 10.291992 s       |   8.239003 s            |     9.200767 s        |
 
 #### Class:
 
-|Opimizavimo lygis |  Nuskaitymo laikas | Skaičiavimas laikas | Rūšiavimo laikas | Įrašimo į buferį laikas | Pilnas įrašimo laikas |
+|Optimizavimo lygis|  Nuskaitymo laikas | Skaičiavimas laikas | Rūšiavimo laikas | Įrašimo į buferį laikas | Pilnas įrašimo laikas |
 | ---------------- |  ----------------- | ------------------- | ---------------- | ----------------------- | --------------------- |
 | /O1              |   50.669040 s      |    0.236547 s       |   29.778892 s    |  8.493949 s             |    9.477555 s         |
 | /O2              |     49.334820 s    |     0.168400 s      | 27.023528 s      |   8.279520 s            |      9.206352 s       |
