@@ -35,9 +35,22 @@ using std::list;
 using std::deque;
 using std::strcmp;
 
-class Student {
-private:
+
+class Human {
+protected:
     string firstName, lastName;
+public:
+    Human() = default;
+    virtual ~Human() = 0;
+    void setFirstName(string Name) ;
+    void setLastName(string name) ;
+    string getFirstName() const ;
+    string getLastName() const ;
+};
+
+
+class Student: public Human {
+private:
     vector<int> homeworkGrades;
     int homeworkSize = 0, examGrade{};
     double finalGrade{};
@@ -46,14 +59,10 @@ public:
     Student(const Student& student);
     ~Student();
 
-    void setFirstName(string name);
-    void setLastName(string name);
     void addGrade(int Grade);
     void setExamGrade(int Exam);
     void setFinalGrade(double Grade);
 
-    string getFirstName() const;
-    string getLastName() const;
     int getHomeworkSize() const;
     int getHomeworkGrade(int index) const;
     int getExamGrade() const;
