@@ -6,7 +6,8 @@
 [v0.4](https://github.com/Step1st/2nd-Assignment/tree/v0.4)  
 [v0.5](https://github.com/Step1st/2nd-Assignment/tree/v0.5)  
 [v1.0](https://github.com/Step1st/2nd-Assignment/tree/v1.0)  
-[v1.1](https://github.com/Step1st/2nd-Assignment-class/tree/v1.1)
+[v1.1](https://github.com/Step1st/2nd-Assignment-class/tree/v1.1)  
+[v1.2](https://github.com/Step1st/2nd-Assignment-class/tree/v1.2)
 
 ##  Programos naudojimas ir veikimo principas
 ### Veikimo princimas
