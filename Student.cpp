@@ -5,7 +5,18 @@
 #include "Student.h"
 // Student class functions:
 
-Student::Student() {}
+Student::Student() = default;
+
+Student::Student(const Student& student) {
+    this->setFirstName(student.getFirstName());
+    this->setLastName(student.getLastName());
+    this->setExamGrade(student.getExamGrade());
+    this->setFinalGrade(student.getFinalGrade());
+    for(int i=0; i<student.getHomeworkSize(); i++)
+    {
+        this->addGrade(student.getHomeworkGrade(i));
+    }
+}
 
 Student::~Student() {
     homeworkGrades.clear();
@@ -42,6 +53,21 @@ void Student::removeLastGrade() {
     homeworkGrades.pop_back();
     homeworkSize = homeworkSize - 1;
     homeworkGrades.shrink_to_fit();
+}
+
+Student &Student::operator=(const Student& student) {
+    if (&student == this ) return *this;
+
+    this->setFirstName(student.getFirstName());
+    this->setLastName(student.getLastName());
+    this->setExamGrade(student.getExamGrade());
+    this->setFinalGrade(student.getFinalGrade());
+    for(int i=0; i<student.getHomeworkSize(); i++)
+    {
+        this->addGrade(student.getHomeworkGrade(i));
+    }
+
+    return *this;
 }
 
 

@@ -1,6 +1,8 @@
 
 #include "General.h"
 
+#include "General.h"
+
 //checks is string is only made out of digits
 
 bool isdigits(string& str)

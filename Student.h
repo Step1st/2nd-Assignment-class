@@ -39,11 +39,11 @@ class Student {
 private:
     string firstName, lastName;
     vector<int> homeworkGrades;
-    int homeworkSize = 0, examGrade;
-    double finalGrade;
+    int homeworkSize = 0, examGrade{};
+    double finalGrade{};
 public:
     Student();
-    //Student( string firstName, string lastName);
+    Student(const Student& student);
     ~Student();
 
     void setFirstName(string name);
@@ -60,6 +60,8 @@ public:
     double getFinalGrade() const;
 
     void removeLastGrade();
+
+    Student& operator=(const Student& student);
 
     void finalGradeAverage();
     void finalGradeMedian();
