@@ -16,7 +16,7 @@ string Human::getFirstName() const { return firstName; }
 
 string Human::getLastName() const { return lastName; }
 
-Human::~Human() {}
+Human::~Human() = default;
 
 // Student class functions:
 
@@ -34,8 +34,7 @@ Student::Student(const Student& student)  : Human(student) {
 }
 
 Student::~Student() {
-    homeworkGrades.clear();
-    homeworkGrades.shrink_to_fit();
+    homeworkGrades.resize(0);
 }
 
 void Student::addGrade(int Grade) {
