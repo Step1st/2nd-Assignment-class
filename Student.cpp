@@ -3,11 +3,26 @@
 //
 
 #include "Student.h"
+
+#include <utility>
+
+//Human class functions:
+
+void Human::setFirstName(string Name) { firstName = std::move(Name);}
+
+void Human::setLastName(string Name) { lastName = std::move(Name);}
+
+string Human::getFirstName() const { return firstName; }
+
+string Human::getLastName() const { return lastName; }
+
+Human::~Human() = default;
+
 // Student class functions:
 
 Student::Student() = default;
 
-Student::Student(const Student& student) {
+Student::Student(const Student& student)  : Human(student) {
     this->setFirstName(student.getFirstName());
     this->setLastName(student.getLastName());
     this->setExamGrade(student.getExamGrade());
@@ -19,13 +34,8 @@ Student::Student(const Student& student) {
 }
 
 Student::~Student() {
-    homeworkGrades.clear();
-    homeworkGrades.shrink_to_fit();
+    homeworkGrades.resize(0);
 }
-
-void Student::setFirstName(string Name) { firstName = Name; }
-
-void Student::setLastName(string Name) { lastName = Name; }
 
 void Student::addGrade(int Grade) {
     homeworkGrades.push_back(Grade);
@@ -36,10 +46,6 @@ void Student::addGrade(int Grade) {
 void Student::setExamGrade(int Exam) { examGrade = Exam; }
 
 void Student::setFinalGrade(double Grade) { finalGrade = Grade; }
-
-string Student::getFirstName() const { return firstName; }
-
-string Student::getLastName() const { return lastName; }
 
 int Student::getHomeworkSize() const { return homeworkSize; }
 
@@ -92,6 +98,9 @@ void Student::finalGradeMedian() {
     }
     setFinalGrade((median * 0.4) + (getExamGrade() * 0.6));
 }
+
+
+
 
 
 // Program functions:
@@ -244,3 +253,4 @@ void print(vector<Student>& group, bool isMedian) {
              << i.getLastName() << string(21 - i.getLastName().length(), ' ') << i.getFinalGrade() << endl;
     }
 }
+
