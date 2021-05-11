@@ -23,14 +23,11 @@ Human::~Human() = default;
 Student::Student() = default;
 
 Student::Student(const Student& student)  : Human(student) {
-    this->setFirstName(student.getFirstName());
-    this->setLastName(student.getLastName());
-    this->setExamGrade(student.getExamGrade());
-    this->setFinalGrade(student.getFinalGrade());
-    for(int i=0; i<student.getHomeworkSize(); i++)
-    {
-        this->addGrade(student.getHomeworkGrade(i));
-    }
+    setFirstName(student.getFirstName());
+    setLastName(student.getLastName());
+    setExamGrade(student.getExamGrade());
+    setFinalGrade(student.getFinalGrade());
+    homeworkGrades = student.homeworkGrades;
 }
 
 Student::~Student() {
@@ -64,14 +61,11 @@ void Student::removeLastGrade() {
 Student &Student::operator=(const Student& student) {
     if (&student == this ) return *this;
 
-    this->setFirstName(student.getFirstName());
-    this->setLastName(student.getLastName());
-    this->setExamGrade(student.getExamGrade());
-    this->setFinalGrade(student.getFinalGrade());
-    for(int i=0; i<student.getHomeworkSize(); i++)
-    {
-        this->addGrade(student.getHomeworkGrade(i));
-    }
+    setFirstName(student.getFirstName());
+    setLastName(student.getLastName());
+    setExamGrade(student.getExamGrade());
+    setFinalGrade(student.getFinalGrade());
+    homeworkGrades = student.homeworkGrades;
 
     return *this;
 }

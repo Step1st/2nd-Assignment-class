@@ -20,7 +20,6 @@ void sortStudents2(list<Student>&, list<Student>&);
 
 template <class T>
 void sortStudents(T& group, T& groupGood, T& groupBad) {
-
     std::sort(group.begin(), group.end(), compareByFinalGrade);
     auto it = std::find_if(group.begin(), group.end(), isGood);
 
