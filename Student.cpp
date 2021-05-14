@@ -28,7 +28,16 @@ Student::Student(const Student& student)  : Human(student) {
     setExamGrade(student.getExamGrade());
     setFinalGrade(student.getFinalGrade());
     homeworkGrades = student.homeworkGrades;
+    homeworkSize = student.homeworkSize;
 }
+
+Student::Student(const string FirstName, const string LastName, vector<int> Grades) {
+    setFirstName(FirstName);
+    setLastName(LastName);
+    homeworkGrades = Grades;
+    homeworkSize = Grades.size();
+}
+
 
 Student::~Student() {
     homeworkGrades.resize(0);
@@ -52,6 +61,9 @@ int Student::getExamGrade() const { return examGrade; }
 
 double Student::getFinalGrade() const { return finalGrade;}
 
+vector<int> Student::getGrades() const { return homeworkGrades; }
+
+
 void Student::removeLastGrade() {
     homeworkGrades.pop_back();
     homeworkSize = homeworkSize - 1;
@@ -66,6 +78,7 @@ Student &Student::operator=(const Student& student) {
     setExamGrade(student.getExamGrade());
     setFinalGrade(student.getFinalGrade());
     homeworkGrades = student.homeworkGrades;
+    homeworkSize = student.homeworkSize;
 
     return *this;
 }
@@ -92,10 +105,6 @@ void Student::finalGradeMedian() {
     }
     setFinalGrade((median * 0.4) + (getExamGrade() * 0.6));
 }
-
-
-
-
 
 // Program functions:
 
