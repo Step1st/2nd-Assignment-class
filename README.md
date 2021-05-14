@@ -7,7 +7,9 @@
 [v0.5](https://github.com/Step1st/2nd-Assignment/tree/v0.5)  
 [v1.0](https://github.com/Step1st/2nd-Assignment/tree/v1.0)  
 [v1.1](https://github.com/Step1st/2nd-Assignment-class/tree/v1.1)  
-[v1.2](https://github.com/Step1st/2nd-Assignment-class/tree/v1.2)
+[v1.2](https://github.com/Step1st/2nd-Assignment-class/tree/v1.2)  
+[v1.5](https://github.com/Step1st/2nd-Assignment-class/tree/v1.5.1)  
+[v2.0](https://github.com/Step1st/2nd-Assignment-class/tree/v2.0)  
 
 ##  Programos naudojimas ir veikimo principas
 ### Veikimo princimas
@@ -193,6 +195,12 @@ Writing took 0.013780 s
 | /O2              |     49.334820 s    |     0.168400 s      | 27.023528 s      |   8.279520 s            |      9.206352 s       |
 
 ## Įdiegimas
+
+### Naujodant installer'į
+
+Paleiskite ```setup.exe``` installer'į, atlikite nurodytas instrukcijas installer'yje ir programa bus sėkmingai įdiegta. 
+
+### Naudojant CMake
 Visus atsiustus failus įdėkite į viena atskyra aplankalą ir CMake.   
 CMake aplinkoje į ``` Where is the source code``` įrašykite kelią iki atsiustų failų, o į ``` Where to build the binaries``` įrašykite kelią kur norite gauti veikiančia programa.  
 

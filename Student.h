@@ -57,6 +57,7 @@ private:
 public:
     Student();
     Student(const Student& student);
+    Student(const string FirstName, const string LastName, vector<int> Grades );
     ~Student();
 
     void addGrade(int Grade);
@@ -67,6 +68,7 @@ public:
     int getHomeworkGrade(int index) const;
     int getExamGrade() const;
     double getFinalGrade() const;
+    vector<int> getGrades() const;
 
     void removeLastGrade();
 
